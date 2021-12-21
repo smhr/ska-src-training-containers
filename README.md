@@ -38,4 +38,26 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 **Monday 14/2/22:** availability for Q&A (extended time zone availability)
 
+# Training event materials 
+
+## Get everything installed 
+
+TBD
+
+
+
+## Talks
+
+- Introduction on data handling challenges and portability - Marcella Massarti (INAF) and Anna Bonaldi (SKAO)
+- Introduction to the first SKA science data challenge and algorithm - Philippa Hartley (SKAO)
+- Introduction to Git - Mateusz Malenta (University of Manchester)
+- Introduction to Github/Gitlab - Javier Moldón (IAA-CSIC)
+- Hands on on GitLab - Manuel Parra (IAA-CSIC)
+- Intro to docker/singularity containers - Manuel Parra (IAA-CSIC) and Mateusz Malenta (University of Manchester)
+- Hands-on on Git and Containers - Alex Clarke (SKAO) and Manuel Parra (IAA-CSIC)
+- Intermediate Github: pull requests/command line - Javier Moldón (IAA-CSIC)
+- Building your own custom containers - Mateusz Malenta
+- Intermediate git/docker - Alex Clarke (SKAO)
+
+
 
