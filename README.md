@@ -38,4 +38,4 @@ Hands on Git and Containers - Intermediate
 
 **Monday 14/2/22:** availability for Q&A (extended time zone availability)
 
-More details soon...
+
