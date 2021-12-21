@@ -29,10 +29,10 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 **Thursday 3/2/22:** availability for Q&A (extended time zone availability)
 
 **Monday 7/2/22:** lessons and tutorials (around 3 hours in total, times TBC)
-Open Q&A to follow up on the issues found
-Intermediate Github - pull requests/command line
-Building your own custom containers
-Hands on Git and Containers - Intermediate
+- Open Q&A to follow up on the issues found
+- Intermediate Github - pull requests/command line
+- Building your own custom containers
+- Hands on Git and Containers - Intermediate
 
 **Thursday 10/2/22:** availability for Q&A (extended time zone availability)
 
