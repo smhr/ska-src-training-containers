@@ -17,6 +17,7 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 ### Preliminary programme 
 
 **Thursday 27/1/22:** technical support to get everything installed
+
 **Monday 31/1/22:** lessons and tuturials (around 3 hours in total, times TBC)
 - Welcome, data handling challenges and portability 
 - Introduction to the first SKA science data challenge & algorithm
@@ -24,13 +25,17 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 - Introduction to Github/Gitlab
 - Introduction to Docker/Singularity containers
 - Hands on Git and Containers - Beginners
+
 **Thursday 3/2/22:** availability for Q&A (extended time zone availability)
+
 **Monday 7/2/22:** lessons and tutorials (around 3 hours in total, times TBC)
 Open Q&A to follow up on the issues found
 Intermediate Github - pull requests/command line
 Building your own custom containers
 Hands on Git and Containers - Intermediate
+
 **Thursday 10/2/22:** availability for Q&A (extended time zone availability)
+
 **Monday 14/2/22:** availability for Q&A (extended time zone availability)
 
 More details soon...
