@@ -52,7 +52,7 @@ TBD
 - Introduction to the first SKA science data challenge and algorithm - Philippa Hartley (SKAO)
 - Introduction to Git - Mateusz Malenta (University of Manchester)
 - Introduction to Github/Gitlab - Javier Moldón (IAA-CSIC)
-- Hands on on GitLab - Manuel Parra (IAA-CSIC)
+- Hands on GitLab - Manuel Parra (IAA-CSIC)
 - Intro to docker/singularity containers - Manuel Parra (IAA-CSIC) and Mateusz Malenta (University of Manchester)
 - Hands-on on Git and Containers - Alex Clarke (SKAO) and Manuel Parra (IAA-CSIC)
 - Intermediate Github: pull requests/command line - Javier Moldón (IAA-CSIC)
