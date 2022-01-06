@@ -112,5 +112,22 @@ To add a new file including the content we use the "New File" option. From there
 
 ![Add new file requirements.txt´ - Screen](./media/add_new_file_requirements.png) 
 
+As usual, any changes we make must be followed by a **"Commit"** to save the changes up to this point. 
+
+Now we create a directory where we will store the project data files. To do this we will use the option to add a directory and then upload the files we have downloaded from *here*. We need to go back to the main repository screen and from there select to include the new repository. 
+
+![Create new folder dataset  - Screen](./media/create_new_folder.png) 
+
+Now we include the downloaded data into the directory from the "Upload" option.
+
+![Upload Dataset  - Screen](./media/upload_dataset.png) 
+
+After including the datasets, we return to the initial screen of the repository and we should have the following structure created:
+
+![Upload Dataset  - Screen](./media/main_screen_after_add_files.png)  
+
+
+### Updating content and checking history versions
+
 
 
