@@ -54,6 +54,20 @@ Once the repository has been created, the initial screen of the repository will 
 
 ![New Repository - Main Screen](./media/show_repository_mainscreen.png)
 
+### Including our license
+
+It is very important to add a licence to all your repositories. Public repositories on GitLab are often used to share open source software. For your repository to truly be open source, you'll need to license it so that others are free to use, change, and distribute the software, or your project.
+
+![Add license - Main Screen](./media/add_license_screen.png)
+
+Once here we can write the terms of our licence, but it is more appropriate to select a type of licence from one of the templates already available, so you can select the one that best suits the content to be distributed by the repository.
+
+![Add license select - Main Screen](./media/add_license_select_mit.png)
+
+Then you must select **"Commit"** to save the newly included licence and the changes made to the repository.
+
+We now return to the main screen of our repository.
+
 ### Adding content: Updating
 
 By default the repository is created with a `README.md` file as an example. Whenever there is a `README.md` file in a directory in the repository, it will be taken as documentation or repository information. 
@@ -79,4 +93,24 @@ We go back to the repository home screen and you can see the changes made.
 ![Main Screen After update](./media/goto_main_screen.png)
 
 ### Adding content: New file
+
+To include new files and directories we can do it from the web interface through the following feature:
+
+![Add new file - Screen](./media/add_new_file_screen.png)
+
+There are several ways to include content from the web interface:
+
+- **Add a new file**: From this option we can include content directly from the browser with a simple text editor, without having to use the "git" commands from the console.
+- **Upload a new file**.
+- **Create a new directory**: We can create a directory structure for our project and add files.
+
+![Add new file Selection - Screen](./media/add_new_file_selection.png)
+
+To add a new file including the content we use the "New File" option. From there we write in the browser the content of our file, in this case a file for the python package requirements.
+
+To add a new file including the content we use the "New File" option. From there we write in the browser the content of our file, in this case a file for the python package `requirements.txt`.
+
+![Add new file requirements.txt´ - Screen](./media/add_new_file_requirements.png) 
+
+
 
