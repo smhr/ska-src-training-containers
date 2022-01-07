@@ -47,11 +47,11 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 #### Git for Mac OS X
 
 There are several ways to install Git on a Mac. If you've installed XCode (or it's Command Line Tools), Git may already be installed. 
-To find out, open a terminal and enter `git --version`. If the command returns the git version, then it is installed, otherwise you can install Xcode from the App Store (https://apps.apple.com/us/app/xcode/) or use the other methods below. 
+To find out, open a terminal and enter `git --version`. If the command returns the git version, then it is installed, otherwise you can install [Xcode from the App Store](https://apps.apple.com/us/app/xcode/) or use the other methods below. 
 
 **Install Git on a Mac is via the stand-alone installer**
 
-1. Download the latest Git for Mac installer https://sourceforge.net/projects/git-osx-installer/files/ and then install it.
+1. Download the latest Git for Mac installer [here](https://sourceforge.net/projects/git-osx-installer/files/) and then install it.
 2. Open a terminal and verify the installation was successful by typing `git --version`.
 
 
@@ -100,7 +100,37 @@ or
 sudo yum install git
 ``
 
-Verify the installation was successful by typing `git --version`:
+Verify the installation was successful by typing `git --version`.
+
+**Setting-up git configuration**
+
+Once you have verified or installed `git`, you have to configure your credentials.
+
+To do that, configure your Git username and email using the following commands, replacing Manuel's name with your own. These details will be associated with any commits that you create (remember to use the same name and email that you usually register with, for example the one you will use in GitLab):
+
+```
+git config --global user.name "Manuel"
+git config --global user.email "manuel@email.com"
+```
+
+
+#### Git for Windows
+
+Download the latest [Git for Windows installer](https://git-for-windows.github.io/) and install it.
+
+Then, open a Command Prompt (or Git Bash if during installation you elected not to use Git from the Windows Command Prompt), and verify the installation was successful by typing `git --version`.
+ 
+**Setting-up git configuration**
+
+Once you have verified or installed `git`, you have to configure your credentials.
+
+To do that, configure your Git username and email using the following commands, replacing Manuel's name with your own. These details will be associated with any commits that you create (remember to use the same name and email that you usually register with, for example the one you will use in GitLab):
+
+```
+git config --global user.name "Manuel"
+git config --global user.email "manuel@email.com"
+```
+
 
 
 #### Docker
