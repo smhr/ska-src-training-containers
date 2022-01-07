@@ -42,6 +42,7 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 ## Get everything installed 
 
+
 ### Manual installation
 
 #### Git 
@@ -262,9 +263,25 @@ sudo docker run hello-world
 ```
 
 
-
 #### Singularity
 
+TBC.
+
+### All-in-one installation
+
+TBC.
+
+#### Virtual Box - Virtual Machine
+
+TBC.
+
+####  Vagrant - Virtual Machine
+
+TBC.
+
+### Training checklist
+
+TBC.
 
 ## Talks
 
