@@ -42,8 +42,70 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 ## Get everything installed 
 
-TBD
+### Manual installation
 
+#### Git for Mac OS X
+
+There are several ways to install Git on a Mac. If you've installed XCode (or it's Command Line Tools), Git may already be installed. 
+To find out, open a terminal and enter `git --version`. If the command returns the git version, then it is installed, otherwise you can install Xcode from the App Store (https://apps.apple.com/us/app/xcode/) or use the other methods below. 
+
+**Install Git on a Mac is via the stand-alone installer**
+
+1. Download the latest Git for Mac installer https://sourceforge.net/projects/git-osx-installer/files/ and then install it.
+2. Open a terminal and verify the installation was successful by typing `git --version`.
+
+
+**Install Git with Homebrew**
+
+First you need to have [HomeBrew](http://brew.sh/) installed, after that follow the next:
+
+1. Open your terminal and install Git using Homebrew: `brew install git`.
+2. Verify the installation was successful by typing which `git --version`.
+
+**Setting-up git configuration**
+
+Once you have verified or installed `git`, you have to configure your credentials.
+
+To do that, configure your Git username and email using the following commands, replacing Manuel's name with your own. These details will be associated with any commits that you create (remember to use the same name and email that you usually register with, for example the one you will use in GitLab):
+
+```
+git config --global user.name "Manuel"
+git config --global user.email "manuel@email.com"
+```
+
+#### Git for Linux
+
+Depending on your Linux distribution, you can use the following options.
+
+**Debian / Ubuntu (with apt-get)**
+
+From your shell, install Git using `apt-get`:
+
+```
+sudo apt-get update
+sudo apt-get install git
+```
+
+Verify the installation was successful by typing `git --version`
+
+**Fedora (dnf or yum)**
+
+From your shell, install Git using dnf (or yum, on older versions of Fedora):
+
+``
+sudo dnf install git
+``
+or
+``
+sudo yum install git
+``
+
+Verify the installation was successful by typing `git --version`:
+
+
+#### Docker
+
+#### Singularity
 
 
 ## Talks
