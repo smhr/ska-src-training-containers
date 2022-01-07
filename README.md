@@ -44,7 +44,8 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 ### Manual installation
 
-#### Git for Mac OS X
+#### Git 
+#####  Git for Mac OS X
 
 There are several ways to install Git on a Mac. If you've installed XCode (or it's Command Line Tools), Git may already be installed. 
 To find out, open a terminal and enter `git --version`. If the command returns the git version, then it is installed, otherwise you can install [Xcode from the App Store](https://apps.apple.com/us/app/xcode/) or use the other methods below. 
@@ -60,7 +61,7 @@ To find out, open a terminal and enter `git --version`. If the command returns t
 First you need to have [HomeBrew](http://brew.sh/) installed, after that follow the next:
 
 1. Open your terminal and install Git using Homebrew: `brew install git`.
-2. Verify the installation was successful by typing which `git --version`.
+2. Verify the installation was successful by typing `git --version`.
 
 **Setting-up git configuration**
 
@@ -73,7 +74,7 @@ git config --global user.name "Manuel"
 git config --global user.email "manuel@email.com"
 ```
 
-#### Git for Linux
+##### Git for Linux
 
 Depending on your Linux distribution, you can use the following options.
 
@@ -114,7 +115,7 @@ git config --global user.email "manuel@email.com"
 ```
 
 
-#### Git for Windows
+##### Git for Windows
 
 Download the latest [Git for Windows installer](https://git-for-windows.github.io/) and install it.
 
@@ -131,9 +132,136 @@ git config --global user.name "Manuel"
 git config --global user.email "manuel@email.com"
 ```
 
-
-
 #### Docker
+
+##### Docker for MacOS X
+
+*Requirements:*
+- MacOS must be version 10.15 (Catalina, Big Sur, or Monterey) or newer and least 4GB of RAM.
+
+Download Docker Desktop for Mac (for Mac with Intel Architecture) [here](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64) (aprox. 550 MB).
+
+Double-click `Docker.dmg` to open the installer, then drag the Docker icon to the Applications folder. 
+
+Double-click ``Docker.ap`` in the Applications folder to start Docker (you will see an icon in the Mac bar).
+
+After that: 
+1. Open a terminal and verify the installation was successful by typing: `docker --version`.
+
+##### Docker for Linux
+
+Depending on your Linux distribution, you can use the following options.
+
+**Debian / Ubuntu**
+
+Older versions of Docker were called docker, docker.io, or docker-engine. If these are installed, uninstall them:
+
+```
+sudo apt-get remove docker docker-engine docker.io containerd runc
+```
+
+Update the apt package index and install packages to allow apt to use a repository over HTTPS:
+
+```
+sudo apt-get update
+
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
+Add Docker’s official GPG key:
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+Use the following command to set up the stable repository:
+
+```
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+Update the apt package index, and install the latest version of Docker Engine and containerd
+
+```
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+After that verify if Docker Engine is installed correctly by running the `hello-world` image.
+
+```
+sudo docker run hello-world
+```
+
+**CentOS / Fedora**
+
+Older versions of Docker were called docker or docker-engine. If these are installed, uninstall them, along with associated dependencies.
+
+```
+sudo dnf remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+```
+
+Install the dnf-plugins-core package (which provides the commands to manage your DNF repositories) and set up the stable repository.
+
+
+```
+sudo dnf -y install dnf-plugins-core
+
+ sudo dnf config-manager \
+    --add-repo \
+    https://download.docker.com/linux/fedora/docker-ce.repo
+
+```
+
+Install the latest version of Docker Engine and containerd:
+
+```
+sudo dnf install docker-ce docker-ce-cli containerd.io
+```
+
+Start Docker
+
+```
+sudo systemctl start docker
+```
+
+After that verify if Docker Engine is installed correctly by running the `hello-world` image.
+
+```
+sudo docker run hello-world
+```
+
+##### Docker for Windows
+
+Requirements:
+- Windows 11 64-bit, Windows 10 64-bit, at least 4GB system RAM, and BIOS-level hardware virtualization support must be enabled in the BIOS settings.
+
+Download Docker Desktop [here](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
+
+Double-click `Docker Desktop Installer.exe` to run the installer. After installation Docker Desktop does not start automatically after installation. To start Docker Desktop: Search for Docker and execute it (you will see a Docker icon within the taskbar).
+
+After that verify if Docker Engine is installed correctly by opening a Command Prompt and running the `hello-world` image:
+
+```
+sudo docker run hello-world
+```
+
+
 
 #### Singularity
 
