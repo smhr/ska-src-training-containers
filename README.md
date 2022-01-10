@@ -424,23 +424,96 @@ singularity version
 ```
 
 
-
-
 ### All-in-one installation
 
-TBC.
-
-#### Virtual Box - Virtual Machine
-
-TBC.
+With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything installed and ready to work. To enable this environment, it is necessary to install some components.
 
 ####  Vagrant - Virtual Machine
 
-TBC.
+##### Install components
+
+First install VirtualBox for your system (Linux, MacOSX or Windows):
+
+- [Windows](https://download.virtualbox.org/virtualbox/6.1.30/VirtualBox-6.1.30-148432-Win.exe).
+- [MacOS X](https://download.virtualbox.org/virtualbox/6.1.30/VirtualBox-6.1.30-148432-OSX.dmg).
+- Download your VirtualBox [Linux](https://www.virtualbox.org/wiki/Linux_Downloads) version.
+
+Then, install Vagrant for your Operating System:
+
+**For Debian/Ubuntu**
+
+```
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install vagrant
+```
+
+**For Fedora/CentOS**
+
+```
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install vagrant
+```
+
+**For Windows**
+
+Vagrant for <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_i686.msi" >32-bit</a> or <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.msi" >64-bit</a>
+
+**For MacOS X**
+
+From brew:
+
+```
+brew install vagrant
+```
+
+From native application, download the following [file](https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.dmg) and install it.
+
+##### Deploy SKA-Training environment
+
+**For MacOS X**
+
+Open a Terminal and type the following, we will create our environment project folder and the shared folder to work with :
+
+```
+mkdir ska-training && cd ska-training
+```
+
+And then, the following to confirm you are working in a new environment (just your first time):
+
+```
+vagrant destroy && rm Vagrantfile
+```
+
+Create the SKA-Training environment for vagrant:
+
+```
+export VM=ska-training/containers && vagrant init $VM && vagrant up && vagrant ssh
+```
+
+After that, you will see:
+
+```
+vagrant@ska-training:~$
+
+```
+
+Finally from there you can use the `git`, `docker` and `singularity` commands, to work on the SKA-Training.
+
+**Once in this environment, you can access**
+
+```
+cd /vagrant
+```
+
+Where you will be able to share and view/work with the files stored in that directory on your host machine.
+
 
 ### Training checklist
 
 TBC.
+
 
 ## Talks
 
