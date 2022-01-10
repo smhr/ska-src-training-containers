@@ -265,7 +265,166 @@ sudo docker run hello-world
 
 #### Singularity
 
-TBC.
+To install Singularity it is necessary to install some components first to fully support this container platform. 
+
+#### Singularity for Linux
+
+**CentOS / Fedora**
+
+```
+sudo apt-get update && sudo apt-get install -y build-essential libssl-dev uuid-dev libgpgme11-dev squashfs-tools libseccomp-dev pkg-config
+```
+
+
+**Debian / Ubuntu**
+
+```
+sudo yum update -y && sudo yum groupinstall -y 'Development Tools' &&  sudo yum install -y openssl-devel libuuid-devel libseccomp-devel wget squashfs-tools
+```
+
+For all flavours, download and install Go (Go Lang):
+
+```
+wget https://go.dev/dl/go1.17.6.linux-amd64.tar.gz
+```
+
+Then run the following as root or through sudo: 
+
+```
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz
+```
+
+Add `/usr/local/go/bin` to the PATH environment variable:
+
+```
+export PATH=$PATH:/usr/local/go/bin
+```
+
+Then fix changes: 
+
+```
+echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
+    echo 'export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin' >> ~/.bashrc && \
+    source ~/.bashrc
+```
+
+Verify that you've installed Go by opening a command prompt and typing the following command:
+
+```
+go version
+```
+
+Since we are installing Singularity v3.x you will also need to install `dep` for dependency resolution.
+
+```
+go get -u github.com/golang/dep/cmd/dep
+```
+
+Download, compile and install Singularity:
+
+Clone respository
+
+```
+go get -d github.com/sylabs/singularity
+```
+
+Get an specific version
+
+```
+export VERSION=v3.0.3  &&  cd $GOPATH/src/github.com/sylabs/singularity && git fetch && git checkout $VERSION
+```
+
+Compling and installing Singularity
+
+```
+./mconfig && make -C ./builddir && sudo make -C ./builddir install
+
+```
+
+After that verify if Singularity Engine is installed correctly by running: 
+
+```
+singularity --version
+```
+
+#### Singularity for Windows
+
+Singularity cannot run natively on Windows or Mac because of basic incompatibilities with the host kernel. For this reason, the Singularity community maintains a set of Vagrant Boxes via Vagrant Cloud, one of Hashicorp’s open source tools.
+
+Install the following programs:
+
+- Git for Windows - [Download and install git](https://git-for-windows.github.io/).
+- VirtualBox for Windows  -  [Download and install VirtualBox](https://www.virtualbox.org/wiki/Downloads).
+- Vagrant for Windows - <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_i686.msi" >32-bit</a><a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.msi" >64-bit</a>.
+- Vagrant Manager for Windows - [Donwload and install VManager](https://github.com/lanayotech/vagrant-manager-windows/releases/download/1.0.2.2/VagrantManager-1.0.2.2-Setup.exe)
+
+
+Run GitBash (Windows) and create and enter a directory to be used with your Vagrant VM.
+
+```
+mkdir vm-singularity && cd vm-singularity
+```
+
+If you have already created and used this folder for another VM, you will need to destroy the VM and delete the Vagrantfile.
+
+```
+vagrant destroy && rm Vagrantfile
+```
+
+Then issue the following commands to bring up the Virtual Machine. (Substitute a different value for the $VM variable if you like.)
+
+```
+export VM=sylabs/singularity-3.0-ubuntu-bionic64 && vagrant init $VM && vagrant up && vagrant ssh
+```
+
+You can check the installed version of Singularity with the following:
+
+```
+singularity version
+```
+
+#### Singularity for MacOS X
+
+You need to install several programs. This example uses Homebrew but you can also install these tools using the GUI.
+
+First, optionally install Homebrew.
+
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Next, install Vagrant and the necessary bits (either using this method or by downloading and installing the tools manually).
+
+```
+brew cask install virtualbox && brew cask install vagrant && brew cask install vagrant-manager
+```
+
+Open a Terminal and create and enter a directory to be used with your Vagrant VM.
+
+```
+mkdir vm-singularity && cd vm-singularity
+```
+
+If you have already created and used this folder for another VM, you will need to destroy the VM and delete the Vagrantfile.
+
+```
+vagrant destroy && rm Vagrantfile
+```
+
+Then issue the following commands to bring up the Virtual Machine. (Substitute a different value for the $VM variable if you like.)
+
+```
+export VM=sylabs/singularity-3.0-ubuntu-bionic64 && vagrant init $VM && vagrant up && vagrant ssh
+```
+
+You can check the installed version of Singularity with the following:
+
+```
+singularity version
+```
+
+
+
 
 ### All-in-one installation
 
