@@ -2,7 +2,7 @@
 
 [[_TOC_]]
 
-## SKA regional centre training event
+## :satellite: SKA regional centre training event
 
 The Science User Engagement (SUE) group of the SKA Regional Centre Steering Commitee is glad to announce the SKA Regional Centre Training Event Series: Hands-on Containerization
 
@@ -47,9 +47,9 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 To work in SKA-Training it is necessary to have these three components installed **Git**, **Docker** and **Singularity**, which you can install [manually](#manual-installation) ( [Git](#git), [Docker](#docker), [Singularity](#singularity) ) or you can use our [all-in-one environment](#all-in-one-installation).
 
 
-## Manual installation
+## :clipboard: Manual installation
 
-### Git 
+### :octocat: Git 
 
 Choose your operating system to install it: 
 
@@ -142,7 +142,7 @@ git config --global user.name "Manuel"
 git config --global user.email "manuel@email.com"
 ```
 
-### Docker
+### :pill: Docker
 
 [Docker for Mac OS ](#docker-for-mac-os-x), [Docker for Linux ](#docker-for-linux) or [Docker for Windows](#docker-for-windows) 
 
@@ -277,7 +277,7 @@ sudo docker run hello-world
 ```
 
 
-### Singularity
+### :surfer: DSingularity
 
 To install Singularity it is necessary to install some components first to fully support this container platform. 
 
@@ -440,7 +440,7 @@ singularity version
 ```
 
 
-## All-in-one installation
+## :package: All-in-one installation
 
 With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything up and ready to work. 
 
