@@ -439,9 +439,11 @@ singularity version
 
 ### All-in-one installation
 
-With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything up and ready to work. To enable this environment, it is necessary to install some components.
+With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything up and ready to work. 
 
 ####  Vagrant - Virtual Machine
+
+To enable this environment, it is necessary to install some components. First you need to [install the components](#install-components) and then [deploy the environment](#deploy-ska-training-environment).
 
 ##### Install components
 
