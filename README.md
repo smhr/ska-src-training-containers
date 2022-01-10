@@ -44,11 +44,8 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 ## Get everything installed 
 
-To work in SKA-Training it is necessary to have these three components installed **Git**, **Docker** and **Singularity**, which you can install [manually](#manual-installation) ( [Git](#git)[Docker](#docker)[Singularity](#singularity) ) or you can use an [all-in-one environment](#all-in-one-installation).
+To work in SKA-Training it is necessary to have these three components installed **Git**, **Docker** and **Singularity**, which you can install [manually](#manual-installation) ( [Git](#git), [Docker](#docker), [Singularity](#singularity) ) or you can use an [all-in-one environment](#all-in-one-installation).
 
-- Git (go to inst)
-- Docker
-- Singularity 
 
 ### Manual installation
 
