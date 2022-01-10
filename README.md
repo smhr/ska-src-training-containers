@@ -44,6 +44,11 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 ## Get everything installed 
 
+To work in SKA-Training it is necessary to have these three components installed **Git**, **Docker** and **Singularity**, which you can install [manually](#manual-installation) ( [Git](#git)[Docker](#docker)[Singularity](#singularity) ) or you can use an [all-in-one environment](#all-in-one-installation).
+
+- Git (go to inst)
+- Docker
+- Singularity 
 
 ### Manual installation
 
@@ -51,7 +56,7 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 Choose your operating system to install it: 
 
-[Git for Mac OS ](README.md#git-for-mac-os-x), [Git for Linux ](README.md#git-for-linux) or [Git for Windows](README.md#git-for-windows) 
+[Git for Mac OS ](#git-for-mac-os-x), [Git for Linux ](#git-for-linux) or [Git for Windows](#git-for-windows) 
 
 #####  Git for Mac OS X
 
@@ -141,6 +146,8 @@ git config --global user.email "manuel@email.com"
 ```
 
 #### Docker
+
+[Docker for Mac OS ](#docker-for-mac-os-x), [Docker for Linux ](#docker-for-linux) or [Docker for Windows](#docker-for-windows) 
 
 ##### Docker for MacOS X
 
@@ -273,6 +280,8 @@ sudo docker run hello-world
 #### Singularity
 
 To install Singularity it is necessary to install some components first to fully support this container platform. 
+
+[Singularity for Mac OS ](#singularity-for-mac-os-x), [Singularity for Linux ](#singularity-for-linux) or [Singularity for Windows](#singularity-for-windows) 
 
 #### Singularity for Linux
 
@@ -433,7 +442,7 @@ singularity version
 
 ### All-in-one installation
 
-With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything installed and ready to work. To enable this environment, it is necessary to install some components.
+With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything up and ready to work. To enable this environment, it is necessary to install some components.
 
 ####  Vagrant - Virtual Machine
 
