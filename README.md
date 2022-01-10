@@ -48,6 +48,11 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 ### Manual installation
 
 #### Git 
+
+Choose your operating system to install it: 
+
+[Git for Mac OS ](README.md#git-for-mac-os-x), [Git for Linux ](README.md#git-for-linux) or [Git for Windows](README.md#git-for-windows) 
+
 #####  Git for Mac OS X
 
 There are several ways to install Git on a Mac. If you've installed XCode (or it's Command Line Tools), Git may already be installed. 
