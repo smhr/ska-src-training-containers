@@ -42,20 +42,20 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 # Training event materials 
 
-## Get everything installed 
+# Get everything installed 
 
 To work in SKA-Training it is necessary to have these three components installed **Git**, **Docker** and **Singularity**, which you can install [manually](#manual-installation) ( [Git](#git), [Docker](#docker), [Singularity](#singularity) ) or you can use our [all-in-one environment](#all-in-one-installation).
 
 
-### Manual installation
+## Manual installation
 
-#### Git 
+### Git 
 
 Choose your operating system to install it: 
 
 [Git for Mac OS ](#git-for-mac-os-x), [Git for Linux ](#git-for-linux) or [Git for Windows](#git-for-windows) 
 
-#####  Git for Mac OS X
+####  Git for Mac OS X
 
 There are several ways to install Git on a Mac. If you've installed XCode (or it's Command Line Tools), Git may already be installed. 
 To find out, open a terminal and enter `git --version`. If the command returns the git version, then it is installed, otherwise you can install [Xcode from the App Store](https://apps.apple.com/us/app/xcode/) or use the other methods below. 
@@ -84,7 +84,7 @@ git config --global user.name "Manuel"
 git config --global user.email "manuel@email.com"
 ```
 
-##### Git for Linux
+#### Git for Linux
 
 Depending on your Linux distribution, you can use the following options.
 
@@ -125,7 +125,7 @@ git config --global user.email "manuel@email.com"
 ```
 
 
-##### Git for Windows
+#### Git for Windows
 
 Download the latest [Git for Windows installer](https://git-for-windows.github.io/) and install it.
 
@@ -142,14 +142,15 @@ git config --global user.name "Manuel"
 git config --global user.email "manuel@email.com"
 ```
 
-#### Docker
+### Docker
 
 [Docker for Mac OS ](#docker-for-mac-os-x), [Docker for Linux ](#docker-for-linux) or [Docker for Windows](#docker-for-windows) 
 
-##### Docker for MacOS X
+#### Docker for MacOS X
 
 *Requirements:*
-- MacOS must be version 10.15 (Catalina, Big Sur, or Monterey) or newer and least 4GB of RAM.
+
+> MacOS must be version 10.15 (Catalina, Big Sur, or Monterey) or newer and least 4GB of RAM.
 
 Download Docker Desktop for Mac (for Mac with Intel Architecture) [here](https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64) (aprox. 550 MB).
 
@@ -158,9 +159,10 @@ Double-click `Docker.dmg` to open the installer, then drag the Docker icon to th
 Double-click ``Docker.ap`` in the Applications folder to start Docker (you will see an icon in the Mac bar).
 
 After that: 
+
 1. Open a terminal and verify the installation was successful by typing: `docker --version`.
 
-##### Docker for Linux
+#### Docker for Linux
 
 Depending on your Linux distribution, you can use the following options.
 
@@ -258,10 +260,11 @@ After that verify if Docker Engine is installed correctly by running the `hello-
 sudo docker run hello-world
 ```
 
-##### Docker for Windows
+#### Docker for Windows
 
-Requirements:
-- Windows 11 64-bit, Windows 10 64-bit, at least 4GB system RAM, and BIOS-level hardware virtualization support must be enabled in the BIOS settings.
+*Requirements:*
+
+> Windows 11 64-bit, Windows 10 64-bit, at least 4GB system RAM, and BIOS-level hardware virtualization support must be enabled in the BIOS settings.
 
 Download Docker Desktop [here](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
 
@@ -274,13 +277,13 @@ sudo docker run hello-world
 ```
 
 
-#### Singularity
+### Singularity
 
 To install Singularity it is necessary to install some components first to fully support this container platform. 
 
 [Singularity for Mac OS ](#singularity-for-mac-os-x), [Singularity for Linux ](#singularity-for-linux) or [Singularity for Windows](#singularity-for-windows) 
 
-#### Singularity for Linux
+### Singularity for Linux
 
 **CentOS / Fedora**
 
@@ -360,7 +363,7 @@ After that verify if Singularity Engine is installed correctly by running:
 singularity --version
 ```
 
-#### Singularity for Windows
+### Singularity for Windows
 
 Singularity cannot run natively on Windows or Mac because of basic incompatibilities with the host kernel. For this reason, the Singularity community maintains a set of Vagrant Boxes via Vagrant Cloud, one of Hashicorp’s open source tools.
 
@@ -396,7 +399,7 @@ You can check the installed version of Singularity with the following:
 singularity version
 ```
 
-#### Singularity for MacOS X
+### Singularity for MacOS X
 
 You need to install several programs. This example uses Homebrew but you can also install these tools using the GUI.
 
@@ -437,15 +440,15 @@ singularity version
 ```
 
 
-### All-in-one installation
+## All-in-one installation
 
 With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything up and ready to work. 
 
-####  Vagrant - Virtual Machine
+###  Vagrant - Virtual Machine
 
 To enable this environment, it is necessary to install some components. First you need to [install the components](#install-components) and then [deploy the environment](#deploy-ska-training-environment).
 
-##### Install components
+#### Install components
 
 First install VirtualBox for your system (Linux, MacOSX or Windows):
 
@@ -485,7 +488,7 @@ brew install vagrant
 
 From native application, download the following [file](https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.dmg) and install it.
 
-##### Deploy SKA-Training environment
+#### Deploy SKA-Training environment
 
 **For MacOS X**
 
@@ -525,7 +528,7 @@ cd /vagrant
 Where you will be able to share and view/work with the files stored in that directory on your host machine.
 
 
-### Training checklist
+## Training checklist
 
 TBC.
 
