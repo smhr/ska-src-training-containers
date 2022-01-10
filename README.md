@@ -1,8 +1,8 @@
-# Hands-on Containerization
+# :satellite: SKA hands-on Containerization
 
 [[_TOC_]]
 
-## :satellite: SKA regional centre training event
+## SKA regional centre training event
 
 The Science User Engagement (SUE) group of the SKA Regional Centre Steering Commitee is glad to announce the SKA Regional Centre Training Event Series: Hands-on Containerization
 
@@ -49,7 +49,7 @@ To work in SKA-Training it is necessary to have these three components installed
 
 ## :clipboard: Manual installation
 
-### :octocat: Git 
+### :computer: Git 
 
 Choose your operating system to install it: 
 
@@ -277,13 +277,13 @@ sudo docker run hello-world
 ```
 
 
-### :surfer: DSingularity
+### :surfer: Singularity
 
 To install Singularity it is necessary to install some components first to fully support this container platform. 
 
 [Singularity for Mac OS ](#singularity-for-mac-os-x), [Singularity for Linux ](#singularity-for-linux) or [Singularity for Windows](#singularity-for-windows) 
 
-### Singularity for Linux
+#### Singularity for Linux
 
 **CentOS / Fedora**
 
@@ -363,7 +363,7 @@ After that verify if Singularity Engine is installed correctly by running:
 singularity --version
 ```
 
-### Singularity for Windows
+#### Singularity for Windows
 
 Singularity cannot run natively on Windows or Mac because of basic incompatibilities with the host kernel. For this reason, the Singularity community maintains a set of Vagrant Boxes via Vagrant Cloud, one of Hashicorp’s open source tools.
 
@@ -399,7 +399,7 @@ You can check the installed version of Singularity with the following:
 singularity version
 ```
 
-### Singularity for MacOS X
+#### Singularity for MacOS X
 
 You need to install several programs. This example uses Homebrew but you can also install these tools using the GUI.
 
