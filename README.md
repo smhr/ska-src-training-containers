@@ -18,21 +18,22 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 **Thursday 27/1/22:** technical support to get everything installed
 
-**Monday 31/1/22:** lessons and tuturials (around 3 hours in total, times TBC)
-- Welcome, data handling challenges and portability 
-- Introduction to the first SKA science data challenge & algorithm
-- Introduction to Git
-- Introduction to Github/Gitlab
-- Introduction to Docker/Singularity containers
-- Hands on Git and Containers - Beginners
+**Monday 31/1/22:** lessons and tutorials (around 3 hours in total, times TBC)
+- M. Massardi: Welcome, data handling challenges and portability 
+- P. Hartley: Introduction to the first SKA science data challenge & algorithm
+- M. Malenta: Introduction to Git
+- J. Moldon: Introduction to Github/Gitlab
+- M. Parra: Hands-on Gitlab
+- M. Parra, M. Malenta: Introduction to Docker/Singularity containers
+- A. Clarke: Hands on Git and Containers - Beginners
 
 **Thursday 3/2/22:** availability for Q&A (extended time zone availability)
 
 **Monday 7/2/22:** lessons and tutorials (around 3 hours in total, times TBC)
 - Open Q&A to follow up on the issues found
-- Intermediate Github - pull requests/command line
-- Building your own custom containers
-- Hands on Git and Containers - Intermediate
+- J. Moldon: Intermediate Github - pull requests/command line
+- M. Malenta: Building your own custom containers
+- A. Clarke: Hands on Git and Containers - Intermediate
 
 **Thursday 10/2/22:** availability for Q&A (extended time zone availability)
 
@@ -48,15 +49,15 @@ TBD
 
 ## Talks
 
-- Introduction on data handling challenges and portability - Marcella Massarti (INAF) and Anna Bonaldi (SKAO)
+- Introduction on data handling challenges and portability - Marcella Massarti (INAF)
 - Introduction to the first SKA science data challenge and algorithm - Philippa Hartley (SKAO)
 - Introduction to Git - Mateusz Malenta (University of Manchester)
 - Introduction to Github/Gitlab - Javier Moldón (IAA-CSIC)
-- Hands on on GitLab - Manuel Parra (IAA-CSIC)
-- Intro to docker/singularity containers - Manuel Parra (IAA-CSIC) and Mateusz Malenta (University of Manchester)
+- Hands-on GitLab - Manuel Parra (IAA-CSIC)
+- Introduction to docker/singularity containers - Manuel Parra (IAA-CSIC) and Mateusz Malenta (University of Manchester)
 - Hands-on on Git and Containers - Alex Clarke (SKAO) and Manuel Parra (IAA-CSIC)
 - Intermediate Github: pull requests/command line - Javier Moldón (IAA-CSIC)
-- Building your own custom containers - Mateusz Malenta
+- Building your own custom containers - Mateusz Malenta (University of Manchester)
 - Intermediate git/docker - Alex Clarke (SKAO)
 
 
