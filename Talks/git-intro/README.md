@@ -187,4 +187,165 @@ Here the `-a` option adds the `git add` stage implicitly before the commit and y
 
 ## 5. Tracking Git repository changes
 
+We have now made our first two commits. What if we had more than that? What if you have a project we worked on a while back and don't remember the changes we made months ago? If you remember our "version control" example at the very start, copying files between directories doesn't give us much information. Sure, we could keep separate text files with the changelogs, then develop a place to keep track of them and maybe a script to retrieve these changelogs... Luckily Git comes with these features and much more.
+
+To view the commit history we can use:
+
+```
+$ git log
+
+commit a16c465f37b1e8bed33f8994f37a54ecff7fdbaf (HEAD -> master)
+Author: Mateusz Malenta <mateusz.malenta@gmail.com>
+Date:   Sun Jan 16 18:26:48 2022 +0000
+
+    Updated the hello.txt file
+
+commit f85bcfd67968b47edbeb98cdc663913bfded6059
+Author: Mateusz Malenta <mateusz.malenta@gmail.com>
+Date:   Sun Jan 16 15:11:18 2022 +0000
+
+    Added a hello.txt file
+
+commit df3c41adeb212432c53d93ce6ace5d5374dc6e11 (tag: v2.35.0-rc1, origin/master, origin/main, origin/HEAD)
+Author: Junio C Hamano <gitster@pobox.com>
+Date:   Fri Jan 14 15:26:53 2022 -0800
+
+    Git 2.35-rc1
+    
+    Signed-off-by: Junio C Hamano <gitster@pobox.com>
+
+...
+
+```
+There is a lot of output. If you keep on holding ENTER, you can scroll through the entire history of Git, although it may take some time. `git log` might seem like a simple command, all it does at the end of the day is display your commit messages. It is however extremely powerful and comes with a lot of options. It is therefore important you familiarise yourself with the most common options or the options you think will be the most useful in your day-to-day work. Here we will only scratch the surface and introduce some of the most common and basic `git log` options, the full documentation, just for viewing commit history is around 50 pages long if pasted in a document.
+
+As you have seen, for projects as big as Git, the length of history can be overwhelming. We are able to limit it though. The easiest option is the limit the output to the final *n* commits:
+
+```
+$ git log -1
+
+commit a16c465f37b1e8bed33f8994f37a54ecff7fdbaf (HEAD -> master)
+Author: Mateusz Malenta <mateusz.malenta@gmail.com>
+Date:   Sun Jan 16 18:26:48 2022 +0000
+
+    Updated the hello.txt file
+```
+As we can see, in this case we print out only the last commit. This can be useful if you want to refresh your memory and see the last few commits.
+
+That might not be enough though. For example, what if we wanted to see the commits made in the last 3 weeks, as we remember about an important feature added during that time, but don't remember when exactly? `git log` has an option for that:
+
+```
+$ git log --since="3 weeks ago"
+
+commit a16c465f37b1e8bed33f8994f37a54ecff7fdbaf (HEAD -> master)
+Author: Mateusz Malenta <mateusz.malenta@gmail.com>
+Date:   Sun Jan 16 18:26:48 2022 +0000
+
+    Updated the hello.txt file
+
+...
+
+commit d30126c20d5899f128facbd33ecf27163efe1326
+Author: Elijah Newren <newren@gmail.com>
+Date:   Tue Dec 28 00:20:46 2021 +0000
+
+    merge-ort: fix bug with renormalization and rename/delete conflicts
+    
+    Ever since commit a492d5331c ("merge-ort: ensure we consult df_conflict
+    and path_conflicts", 2021-06-30), when renormalization is active AND a
+    file is involved in a rename/delete conflict BUT the file is unmodified
+    (either before or after renormalization), merge-ort was running into an
+    assertion failure.  Prior to that commit (or if assertions were compiled
+    out), merge-ort would mis-merge instead, ignoring the rename/delete
+    conflict and just deleting the file.
+    
+    Remove the assertions, fix the code appropriately, leave some good
+    comments in the code, and add a testcase for this situation.
+
+
+```
+Even over the course of only 3 weeks there have been quite a few commits to the Git repository, so here we inlcude only the latest one and one that had happened 3 weeks earlier.
+
+If you work in a collaboration where multiple people commit to the project repository, you might want to search for changes made by one person (maybe they have written an amazin algorithm and you want to credit their work in your next comference talk).
+
+```
+$ git log --author="Steve"
+
+commit 84544f2ea3441a5715fc3e2dfbb025083872fac5
+Author: Steve Kemp <steve@steve.org.uk>
+Date:   Wed Jul 29 03:33:28 2020 +0000
+
+    comment: fix spelling mistakes inside comments
+    
+    This commit fixes a couple of minor spelling mistakes inside
+    comments.
+    
+    Signed-off-by: Steve Kemp <steve@steve.org.uk>
+    Signed-off-by: Junio C Hamano <gitster@pobox.com>
+
+commit 64c45dc72ef039215f23d1b8f077dd6f9f254d38
+Author: Steven Roberts <fenderq@gmail.com>
+Date:   Tue Jul 16 11:47:37 2019 -0700
+
+    gpg-interface: do not scan past the end of buffer
+    
+    If the GPG output ends with trailing blank lines, after skipping
+    them over inside the loop to find the terminating NUL at the end,
+    the loop ends up looking for the next line, starting past the end.
+    
+    Signed-off-by: Steven Roberts <sroberts@fenderq.com>
+    Signed-off-by: Junio C Hamano <gitster@pobox.com>
+
+...
+```
+Here we are looking at any commits authored by Steves. We can also combine the options and for example look at commits based on the author and the time of the commit:
+
+```
+$ git log --author="Steve" --since="2 years ago"
+
+commit 84544f2ea3441a5715fc3e2dfbb025083872fac5
+Author: Steve Kemp <steve@steve.org.uk>
+Date:   Wed Jul 29 03:33:28 2020 +0000
+
+    comment: fix spelling mistakes inside comments
+    
+    This commit fixes a couple of minor spelling mistakes inside
+    comments.
+    
+    Signed-off-by: Steve Kemp <steve@steve.org.uk>
+    Signed-off-by: Junio C Hamano <gitster@pobox.com>
+```
+
+All of these are not are not very helpful if you are looking for changes to a specific functions. You might see some relevant information in the commit messages, but that is often not enough, especially if the messages do not have enough detail. With Git, we can easily obtain the commits that changed the speficit functions. It is only fair if we track changes to function used to display the log messages:
+
+```
+$ git log -L:show_log:log-tree.c
+
+commit f1ce6c191e9d15ce78041d8b6496c246b10d9b2d
+Author: Johannes Schindelin <johannes.schindelin@gmx.de>
+Date:   Fri Feb 5 14:46:11 2021 +0000
+
+    range-diff: combine all options in a single data structure
+    
+    This will make it easier to implement the `--left-only` and
+    `--right-only` options.
+    
+    Signed-off-by: Johannes Schindelin <johannes.schindelin@gmx.de>
+    Signed-off-by: Junio C Hamano <gitster@pobox.com>
+
+diff --git a/log-tree.c b/log-tree.c
+--- a/log-tree.c
++++ b/log-tree.c
+@@ -609,223 +609,227 @@
+ void show_log(struct rev_info *opt)
+ {
+        struct strbuf msgbuf = STRBUF_INIT;
+        struct log_info *log = opt->loginfo;
+        struct commit *commit = log->commit, *parent = log->parent;
+        int abbrev_commit = opt->abbrev_commit ? opt->abbrev : the_hash_algo->hexsz;
+        const char *extra_headers = opt->extra_headers;
+        struct pretty_print_context ctx = {0};
+
+```
+As a result, we get back the commits that changed the function `show_log` from the `log-tree.c` file in any way.
 ## Further reading
