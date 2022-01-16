@@ -10,8 +10,8 @@ introduced here or will make use of them on multiple occasions.
 
 - [**What version control is and where Git gits**](#1-version-control-and-git)
 - [**Basic git terminology**](#2-basic-git-terminology-and-operations)
-- [**How to download the code**](#3-basic-git-repositories)
-- [**How to change the code**](#4-changing-git-repository)
+- [**How to download the code**](#3-creating-and-getting-a-git-repository)
+- [**How to change the code**](#4-changing-a-git-repository)
 - [**How to track the changes to the code**](#5-tracking-git-repository-changes)
 
 ## 1. Version control and Git
