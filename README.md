@@ -170,14 +170,12 @@ vagrant ssh
 
 *Remember that after this point you will be executing the commands from that virtual environment.*
 
-
 Last command will allow you access to the created VM, you will see:
 
 ```
 vagrant@ska-training:~$
 
 ```
-
 
 Finally from there you can use the `git`, `docker` and `singularity` commands, to work on the SKA-Training.
 
@@ -188,8 +186,6 @@ cd /vagrant
 ```
 
 Where you will be able to share and view/work with the files stored in that directory on your host machine.
-
-
 
 ### Test the environment
 
@@ -215,7 +211,6 @@ singularity --version
 
 That's all, :smile: enjoy our :milky_way: :rocket: SKA training on git and containers.
 
-
 ## :clipboard: Manual installation
 
 ### :computer: Git 
@@ -233,7 +228,6 @@ To find out, open a terminal and enter `git --version`. If the command returns t
 
 1. Download the latest Git for Mac installer [here](https://sourceforge.net/projects/git-osx-installer/files/) and then install it.
 2. Open a terminal and verify the installation was successful by typing `git --version`.
-
 
 **Install Git with Homebrew**
 
@@ -292,7 +286,6 @@ To do that, configure your Git username and email using the following commands, 
 git config --global user.name "Manuel"
 git config --global user.email "manuel@email.com"
 ```
-
 
 #### Git for Windows
 
@@ -452,9 +445,6 @@ Open a Command Prompt and type the following:
 docker run hello-world
 ```
 
-
-
-
 ### :surfer: Singularity
 
 To install Singularity it is necessary to install some components first to fully support this container platform. 
@@ -468,7 +458,6 @@ To install Singularity it is necessary to install some components first to fully
 ```
 sudo apt-get update && sudo apt-get install -y build-essential libssl-dev uuid-dev libgpgme11-dev squashfs-tools libseccomp-dev pkg-config
 ```
-
 
 **Debian / Ubuntu**
 
@@ -547,14 +536,12 @@ Singularity cannot run natively on Windows or Mac because of basic incompatibili
 
 *Note: Singularity for Windows requires a restart once installed.* 
 
-
 Install the following programs:
 
 - Git for Windows - [Download and install git](https://git-for-windows.github.io/).
 - VirtualBox for Windows  -  [Download and install VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 - Vagrant for Windows - <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_i686.msi" >32-bit</a> or <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.msi" >64-bit</a>.
 - Vagrant Manager for Windows - [Donwload and install VManager](https://github.com/lanayotech/vagrant-manager-windows/releases/download/1.0.2.2/VagrantManager-1.0.2.2-Setup.exe)
-
 
 Run GitBash (Windows) and create and enter a directory to be used with your Vagrant VM.
 
@@ -616,7 +603,6 @@ brew install virtualbox && brew install vagrant && brew install vagrant-manager
 
 *Note that here you will be asked for permissions to install some system extension(s)*
 
-
 Open a Terminal and create and enter a directory to be used with your Vagrant VM.
 
 ```
@@ -640,7 +626,6 @@ You can check the installed version of Singularity with the following:
 ```
 singularity version
 ```
-
 
 ## Training checklist
 
