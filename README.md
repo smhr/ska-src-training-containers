@@ -103,9 +103,9 @@ brew install vagrant
 
 From native application, download the following [file](https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.dmg) and install it.
 
-#### Deploy SKA-Training environment
-
-**For MacOS X**
+### Deploy SKA-Training environment
+    
+**For Linux and MacOS X**
 
 Open a Terminal and type the following, we will create our environment project folder and the shared folder to work with :
 
@@ -134,7 +134,7 @@ vagrant@ska-training:~$
 
 Finally from there you can use the `git`, `docker` and `singularity` commands, to work on the SKA-Training.
 
-**Once in this environment, you can access**
+Once in this environment, you can access
 
 ```
 cd /vagrant
@@ -142,7 +142,56 @@ cd /vagrant
 
 Where you will be able to share and view/work with the files stored in that directory on your host machine.
 
-#### Test the environment
+**For Windows**
+
+
+Open a Command prompt and type the following, we will create our environment project folder and the shared folder to work with :
+
+```
+md ska-training
+cd ska-training
+```
+
+And then, the following to confirm you are working in a new environment (just your first time):
+
+```
+vagrant destroy
+del Vagrantfile
+```
+
+Create the SKA-Training environment for vagrant:
+
+```
+set VM=ska-training/containers
+vagrant init %VM%
+vagrant up
+vagrant ssh
+```
+
+*Remember that after this point you will be executing the commands from that virtual environment.*
+
+
+Last command will allow you access to the created VM, you will see:
+
+```
+vagrant@ska-training:~$
+
+```
+
+
+Finally from there you can use the `git`, `docker` and `singularity` commands, to work on the SKA-Training.
+
+Once in this environment, you can access
+
+```
+cd /vagrant
+```
+
+Where you will be able to share and view/work with the files stored in that directory on your host machine.
+
+
+
+### Test the environment
 
 Finally, to confirm that everything is installed and working, run the following commands in this environment:
 
