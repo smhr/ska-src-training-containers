@@ -44,7 +44,127 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 # :rocket: Get everything installed 
 
-To work in SKA-Training it is necessary to have these three components installed **Git**, **Docker** and **Singularity**, which you can install [manually](#manual-installation) ( [Git](#git), [Docker](#docker), [Singularity](#singularity) ) or you can use our [all-in-one environment](#all-in-one-installation).
+To work in SKA-Training it is necessary to have these three components installed **Git**, **Docker** and **Singularity**, which you can use our [all-in-one environment](#all-in-one-installation) or you can install [manually](#manual-installation) ( [Git](#git), [Docker](#docker), [Singularity](#singularity) ).
+
+
+## :package: All-in-one installation
+
+With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything up and ready to work. 
+
+**Minimum requirements**: 
+
+> A 64-bit Intel CPU or Apple Silicon CPU
+> macOS Catalina (10.15) (or higher)
+> Command Line Tools (CLT) for Xcode (from `xcode-select --install` or `https://developer.apple.com/download/all/`) or Xcode
+> At least 2 GBytes of available RAM and 50 GB minimum storage.
+
+
+###  Vagrant - Virtual Machine
+
+To enable this environment, it is necessary to install some components. First you need to [install the components](#install-components) and then [deploy the environment](#deploy-ska-training-environment).
+
+#### Install components
+
+First install VirtualBox for your system (Linux, MacOSX or Windows):
+
+- [Windows](https://download.virtualbox.org/virtualbox/6.1.30/VirtualBox-6.1.30-148432-Win.exe).
+- [MacOS X](https://download.virtualbox.org/virtualbox/6.1.30/VirtualBox-6.1.30-148432-OSX.dmg).
+- Download your VirtualBox [Linux](https://www.virtualbox.org/wiki/Linux_Downloads) version.
+
+Then, install Vagrant for your Operating System:
+
+**For Debian/Ubuntu**
+
+```
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install vagrant
+```
+
+**For Fedora/CentOS**
+
+```
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install vagrant
+```
+
+**For Windows**
+
+Vagrant for <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_i686.msi" >32-bit</a> or <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.msi" >64-bit</a>
+
+**For MacOS X**
+
+From brew:
+
+```
+brew install vagrant
+```
+
+From native application, download the following [file](https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.dmg) and install it.
+
+#### Deploy SKA-Training environment
+
+**For MacOS X**
+
+Open a Terminal and type the following, we will create our environment project folder and the shared folder to work with :
+
+```
+mkdir ska-training && cd ska-training
+```
+
+And then, the following to confirm you are working in a new environment (just your first time):
+
+```
+vagrant destroy && rm Vagrantfile
+```
+
+Create the SKA-Training environment for vagrant:
+
+```
+export VM=ska-training/containers && vagrant init $VM && vagrant up && vagrant ssh
+```
+
+After that, you will see:
+
+```
+vagrant@ska-training:~$
+
+```
+
+Finally from there you can use the `git`, `docker` and `singularity` commands, to work on the SKA-Training.
+
+**Once in this environment, you can access**
+
+```
+cd /vagrant
+```
+
+Where you will be able to share and view/work with the files stored in that directory on your host machine.
+
+#### Test the environment
+
+Finally, to confirm that everything is installed and working, run the following commands in this environment:
+
+*Check `git`*
+
+```
+git --version
+```
+
+*Check `docker`*
+
+```
+docker --version
+```
+
+*Check `singularity`*
+
+```
+singularity --version
+```
+
+That's all, :smile: enjoy our :milky_way: :rocket: SKA training on git and containers.
 
 
 ## :clipboard: Manual installation
@@ -127,13 +247,13 @@ git config --global user.email "manuel@email.com"
 
 #### Git for Windows
 
-Download the latest [Git for Windows installer](https://git-for-windows.github.io/) and install it.
+Download the latest [Git for Windows installer](https://git-for-windows.github.io/) and then  install it.
 
-Then, open a Command Prompt (or Git Bash if during installation you elected not to use Git from the Windows Command Prompt), and verify the installation was successful by typing `git --version`.
+Then, open a Command Prompt (or Git Bash if during installation you elected not to use Git from the Windows Command Prompt), and verify the installation was successful by typing `git --version` and checking it's showing a version greater or equal than `2.34`.
  
 **Setting-up git configuration**
 
-Once you have verified or installed `git`, you have to configure your credentials.
+Once you have verified and installed `git`, you have to configure your credentials.
 
 To do that, configure your Git username and email using the following commands, replacing Manuel's name with your own. These details will be associated with any commits that you create (remember to use the same name and email that you usually register with, for example the one you will use in GitLab):
 
@@ -266,15 +386,24 @@ sudo docker run hello-world
 
 > Windows 11 64-bit, Windows 10 64-bit, at least 4GB system RAM, and BIOS-level hardware virtualization support must be enabled in the BIOS settings.
 
-Download Docker Desktop [here](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
+*Note: Linux kernel for Windows (WSL2) and Docker requires a Windows restart once installed.* 
 
-Double-click `Docker Desktop Installer.exe` to run the installer. After installation Docker Desktop does not start automatically after installation. To start Docker Desktop: Search for Docker and execute it (you will see a Docker icon within the taskbar).
+Download and install the Linux kernel (WSL2) [update package](https://docs.microsoft.com/windows/wsl/wsl2-kernel).
 
-After that verify if Docker Engine is installed correctly by opening a Command Prompt and running the `hello-world` image:
+Then, download and install Docker Desktop [here](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
+
+Double-click `Docker Desktop Installer.exe` to run the installer. Docker Desktop does not start automatically after installation. To start Docker Desktop: *Search for Docker and execute it* (you will see a Docker icon within the taskbar).
+
+
+After that verify if Docker is installed, up and running correctly by opening a Command Prompt and running the `hello-world` image, to do this:
+
+Open a Command Prompt and type the following:
 
 ```
-sudo docker run hello-world
+docker run hello-world
 ```
+
+
 
 
 ### :surfer: Singularity
@@ -367,11 +496,14 @@ singularity --version
 
 Singularity cannot run natively on Windows or Mac because of basic incompatibilities with the host kernel. For this reason, the Singularity community maintains a set of Vagrant Boxes via Vagrant Cloud, one of Hashicorp’s open source tools.
 
+*Note: Singularity for Windows requires a restart once installed.* 
+
+
 Install the following programs:
 
 - Git for Windows - [Download and install git](https://git-for-windows.github.io/).
 - VirtualBox for Windows  -  [Download and install VirtualBox](https://www.virtualbox.org/wiki/Downloads).
-- Vagrant for Windows - <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_i686.msi" >32-bit</a><a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.msi" >64-bit</a>.
+- Vagrant for Windows - <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_i686.msi" >32-bit</a> or <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.msi" >64-bit</a>.
 - Vagrant Manager for Windows - [Donwload and install VManager](https://github.com/lanayotech/vagrant-manager-windows/releases/download/1.0.2.2/VagrantManager-1.0.2.2-Setup.exe)
 
 
@@ -393,11 +525,15 @@ Then issue the following commands to bring up the Virtual Machine. (Substitute a
 export VM=sylabs/singularity-3.0-ubuntu-bionic64 && vagrant init $VM && vagrant up && vagrant ssh
 ```
 
+*Note: This command needs some time to complete :smile:*
+
 You can check the installed version of Singularity with the following:
 
 ```
 singularity version
 ```
+
+Your version should be greater or equal than `3.0`.
 
 #### Singularity for MacOS X
 
@@ -406,14 +542,31 @@ You need to install several programs. This example uses Homebrew but you can als
 First, optionally install Homebrew.
 
 ```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Next, install Vagrant and the necessary bits (either using this method or by downloading and installing the tools manually).
 
+Update `brew` repository:
+
 ```
-brew cask install virtualbox && brew cask install vagrant && brew cask install vagrant-manager
+brew update
 ```
+
+Install VirtualBox, Vagrant, and Vagrant-manager for Catalina, BigSur:
+
+```
+brew install --cask virtualbox && brew install --cask vagrant && brew install --cask vagrant-manager
+```
+
+Install VirtualBox, Vagrant, and Vagrant-manager for Monterrey:
+
+```
+brew install virtualbox && brew install vagrant && brew install vagrant-manager
+```
+
+*Note that here you will be asked for permissions to install some system extension(s)*
+
 
 Open a Terminal and create and enter a directory to be used with your Vagrant VM.
 
@@ -440,98 +593,9 @@ singularity version
 ```
 
 
-## :package: All-in-one installation
-
-With this installation you will be able to use all the tools that we are going to use in this SKA-Training from an environment that has everything up and ready to work. 
-
-###  Vagrant - Virtual Machine
-
-To enable this environment, it is necessary to install some components. First you need to [install the components](#install-components) and then [deploy the environment](#deploy-ska-training-environment).
-
-#### Install components
-
-First install VirtualBox for your system (Linux, MacOSX or Windows):
-
-- [Windows](https://download.virtualbox.org/virtualbox/6.1.30/VirtualBox-6.1.30-148432-Win.exe).
-- [MacOS X](https://download.virtualbox.org/virtualbox/6.1.30/VirtualBox-6.1.30-148432-OSX.dmg).
-- Download your VirtualBox [Linux](https://www.virtualbox.org/wiki/Linux_Downloads) version.
-
-Then, install Vagrant for your Operating System:
-
-**For Debian/Ubuntu**
-
-```
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo apt-get update && sudo apt-get install vagrant
-```
-
-**For Fedora/CentOS**
-
-```
-sudo yum install -y yum-utils
-sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
-sudo yum -y install vagrant
-```
-
-**For Windows**
-
-Vagrant for <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_i686.msi" >32-bit</a> or <a href="https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.msi" >64-bit</a>
-
-**For MacOS X**
-
-From brew:
-
-```
-brew install vagrant
-```
-
-From native application, download the following [file](https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.dmg) and install it.
-
-#### Deploy SKA-Training environment
-
-**For MacOS X**
-
-Open a Terminal and type the following, we will create our environment project folder and the shared folder to work with :
-
-```
-mkdir ska-training && cd ska-training
-```
-
-And then, the following to confirm you are working in a new environment (just your first time):
-
-```
-vagrant destroy && rm Vagrantfile
-```
-
-Create the SKA-Training environment for vagrant:
-
-```
-export VM=ska-training/containers && vagrant init $VM && vagrant up && vagrant ssh
-```
-
-After that, you will see:
-
-```
-vagrant@ska-training:~$
-
-```
-
-Finally from there you can use the `git`, `docker` and `singularity` commands, to work on the SKA-Training.
-
-**Once in this environment, you can access**
-
-```
-cd /vagrant
-```
-
-Where you will be able to share and view/work with the files stored in that directory on your host machine.
-
-
 ## Training checklist
 
 TBC.
-
 
 ## Talks
 
