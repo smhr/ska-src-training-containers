@@ -1,7 +1,7 @@
 pages:
   script:
     - mkdir .public
-    - cp -r install/* .public
+    - cp -r install_docs/* .public
     - mv .public public
   artifacts:
     paths:
