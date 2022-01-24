@@ -1,3 +1,5 @@
+[[TOC]]
+
 ## Objectives and scope
 
 In this section we will show how to use GitLab to share results with the community or your colleagues. You will be able to share code, text documents, figures or notebooks, which can be rendered automatically.
