@@ -83,7 +83,7 @@ Now we are going to modify the `README.md` file so that it has other information
 
 ![Adding Content - Update exisisting](./media/modify_readme_content.png)
 
-Here we include some textual information about the project and repository using a format called MarkDown to compose it (you can check the syntax [here](https://www.markdownguide.org/basic-syntax/) ).
+Here we include some textual information about the project and repository using a format called *MarkDown* to compose it (you can check the syntax [here](https://www.markdownguide.org/basic-syntax/) ).
 
 ![Adding Content - Screen Update exisisting](./media/commit_modify_readme_content.png)
 
@@ -113,15 +113,21 @@ There are several ways to include content from the web interface:
 
 ![Add new file Selection - Screen](./media/add_new_file_selection.png)
 
-To add a new file including the content we use the "New File" option. From there we write in the browser the content of our file, in this case a file for the python package requirements.
+To add a new file including the content we use the "New File" option. From there we write in the browser the content of our file, in this case a file for a DockerFile. Docker can build images automatically by reading the instructions from a **Dockerfile**. A **Dockerfile** is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build users can create an automated build that executes several command-line instructions in succession. So to do that we will add the following content to the new file named `Dockerfile`:
 
-To add a new file including the content we use the "New File" option. From there we write in the browser the content of our file, in this case a file for the python package `requirements.txt`.
+```
+FROM ubuntu:20.10
+RUN apt-get update && apt-get install -y python3 python3-pip
+RUN pip3 install matplotlib
+RUN pip3 install scipy
+RUN pip3 install numpy
+```
 
-![Add new file requirements.txt´ - Screen](./media/add_new_file_requirements.png) 
+![Add new dockerfile - Screen](./media/add_new_dockerfile.png) 
 
 As usual, any changes we make must be followed by a **"Commit"** to save the changes up to this point. 
 
-Now we create a directory where we will store the project data files. To do this we will use the option to add a directory and then upload the files we have downloaded from *here*. We need to go back to the main repository screen and from there select to include the new repository. 
+Now we create a directory where we will store the project data files. We need to go back to the main repository screen and from there select to include the new repository. 
 
 ![Create new folder dataset  - Screen](./media/create_new_folder.png) 
 
@@ -173,6 +179,7 @@ The next screen is where you can include all the data of the Issue, from the nam
 
 ![Add issue button](./media/add_new_issue.png)
 
+After this you will see the list of Issues that have been created so far, with all their attributes.
 
 
 
