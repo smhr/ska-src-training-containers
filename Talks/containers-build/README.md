@@ -7,6 +7,7 @@ Chances are however that you work in a specialised field and none of these milli
 ## In this section you will learn
 
 - [**How to build Docker images**](#1-building-docker-images)
+- [**How to build Singularity containers**](#2-building-singularity-containers)
 
 ## 1. Building Docker images
 
@@ -20,7 +21,7 @@ WORKDIR /software
 RUN apt update && apt -y install git \
   && git clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
 
-CMD ./ska-src-training-containers/Talks/containers-build/files/hello_docker.sh
+CMD ./ska-src-training-containers/Talks/containers-build/files/hello_container.sh
 ```
 
 - **The first line**
@@ -65,3 +66,53 @@ CMD ./ska-src-training-containers/Talks/containers-build/files/hello_docker.sh
     RUN apt update && apt -y install git
     RUN git clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
     ```
+
+## 2. Building Singularity containers
+
+We will now recreate the same recipe, but this time with Singularity. In this case, we are using a *Singularity definition file*. As before, we use this file to speficy a series of instructions that will install software, move the data, etc. to form our final container.
+
+```singularity
+Bootstrap: docker
+From: ubuntu:18.04
+
+%post
+  apt -y update
+  apt -y install git
+  mkdir /software/
+  git -C /software/ clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
+
+%runscript
+  /software/ska-src-training-containers/Talks/containers-build/files/hello_container.sh
+  ```
+
+- **Header**
+
+    ```singularity
+    Bootstrap: docker
+    From: ubuntu:18.04
+    ```
+
+    Your definition file should always have a header at the very beginning of the file. First we instruct the build system of the bootstrap agent. Think of it as a source of your base image. `Bootstrap` is also a required keyword and has to be present **on the first like of every definition file**. In the above definition file we let Singularity know that we would like to build our container based on a Docker image. THis is an important feature than makes transition from Docker to Singularity relatively easy - you can still use Docker images to not only run them with Singularity, but also use them as base layers in your definition files.
+
+    We again use a specific version of Ubuntu, the same one as with our Dockerfile. Feel free to experiment and use different versions of Ubuntu or even completely different operating systems!
+
+- **Installing software**
+
+    After installing our base operating system, we are now ready to install some software. Singularity definitions file have a dedicated `%post` section for this purpose:
+
+    ```singularity
+    %post
+      apt -y update
+      apt -y install git
+      mkdir /software/
+      git -C /software/ clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
+
+    ```
+
+    The main difference is how we create our `/software` directory and clone the repository into it. We explicitly create the directory and then use it as the parent directory for our repo. After that, you can access the training materials when running the container from `/software/ska-src-training-containers`.
+
+Here we covered only the most basic definition file structure. For more details please see [**Singularity documentation**](https://apptainer.org/user-docs/master/definition_files.html)
+
+- **Run something**
+
+  The last section, `%runscript` specifies what we would like to execute when the container is run. Here we just execute our script that prints our a welcome message. You can however include multiple commands in this section. You can even pass options to your commands, just the way you would when writing regular Bash scripts.
