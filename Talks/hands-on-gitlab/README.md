@@ -116,18 +116,44 @@ There are several ways to include content from the web interface:
 To add a new file including the content we use the "New File" option. From there we write in the browser the content of our file, in this case a file for a DockerFile. Docker can build images automatically by reading the instructions from a **Dockerfile**. A **Dockerfile** is a text document that contains all the commands a user could call on the command line to assemble an image. Using docker build users can create an automated build that executes several command-line instructions in succession. So to do that we will add the following content to the new file named `Dockerfile`:
 
 ```
-FROM ubuntu:20.10
+FROM ubuntu:20.04
 RUN apt-get update && apt-get install -y python3 python3-pip
 RUN pip3 install matplotlib
 RUN pip3 install scipy
 RUN pip3 install numpy
+RUN mkdir -p /code
+COPY plot.py /code
+WORKDIR /code
 ```
 
 ![Add new dockerfile - Screen](./media/add_new_dockerfile.png) 
 
 As usual, any changes we make must be followed by a **"Commit"** to save the changes up to this point. 
 
-Now we create a directory where we will store the project data files. We need to go back to the main repository screen and from there select to include the new repository. 
+Now we add another file, this time with a code to plot a graph, which you will test later in the training. 
+
+For this, we repeat the previous steps (add a new file) and include the following code to a file called `plot.py`:
+
+```
+import numpy as np
+from scipy.interpolate import splprep, splev
+
+import matplotlib.pyplot as plt
+from matplotlib.path import Path
+from matplotlib.patches import PathPatch
+
+N = 400
+t = np.linspace(0, 3 * np.pi, N)
+r = 0.5 + np.cos(t)
+x, y = r * np.cos(t), r * np.sin(t)
+fig, ax = plt.subplots()
+ax.plot(x, y)
+plt.xlabel("X value")
+plt.ylabel("Y value")
+plt.savefig('testplot.png')
+```
+
+GitLab also allows you to include directories and create your own structure. Now we create a directory where we will store the project data files. We need to go back to the main repository screen and from there select to include the new repository. 
 
 ![Create new folder dataset  - Screen](./media/create_new_folder.png) 
 
