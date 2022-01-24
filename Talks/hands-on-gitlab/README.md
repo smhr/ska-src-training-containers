@@ -1,4 +1,4 @@
-[[TOC]]
+[[_TOC_]]
 
 ## Objectives and scope
 
