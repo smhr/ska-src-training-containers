@@ -38,13 +38,20 @@ To do this, from the Projects menu, select "New Project" or "Create new project"
 
 ![Create New Project - 1](./media/create_new_project_1.png)
 
+Or from this top menu: 
+
 ![Create New Project - 2](./media/create_new_project_2.png)
 
-After this, select to create a new blank project:
+After this, select *to create a new blank project*, to do that we are going to use the following data that will be used during all the training sessions: 
+
 
 ![Create New Project - 3](./media/create_new_project_screen.png)
 
 Now it is time to indicate the project details and the name of the repository. In the image below we include the project name, the short name, the project description and the visibility of the repository:
+
+- Project name and project slug (i.e.): **ska-src-training**
+- Type a description (i.e.): **"This is our repository for the SKA SRC Training".**
+- Select Visibility Level (i.e.): **Public**
 
 ![Create New Project - 4](./media/create_new_project_details.png)
 
@@ -82,13 +89,13 @@ Here we include some textual information about the project and repository using 
 
 After including some content, what we want to do is to save the work done so far, this is what we call a "Commit", so those changes are ready to be saved. By committing the "Commit", 
 
-![Adding Content - Commit Update exisisting](./media/confirm_commit_mudy_readme_content.png)
+![Adding Content - Commit Update exisisting](./media/confirm_commit_modify_readme_content.png)
 
 To identify the "Commit" it is essential to include a message giving a brief summary of the changes and to decide whether the changes will go to a new development branch or feature.
 
 ![Adding Content - Commit Update exisisting](./media/confirm_commit_modify_readme_content.png)
 
-We go back to the repository home screen and you can see the changes made.
+We go back to the repository home screen (by clicking name of the repository) and you can see the changes made.
 
 ![Main Screen After update](./media/goto_main_screen.png)
 
@@ -127,7 +134,45 @@ After including the datasets, we return to the initial screen of the repository 
 ![Upload Dataset  - Screen](./media/main_screen_after_add_files.png)  
 
 
-### Updating content and checking history versions
+### Checking history versions
+
+To review the versions we have, i.e. the commits that we have been doing throughout the time, we can view them from the option: 
+
+![List Commits History  - Screen](./media/show_commits_history.png)  
+
+Here are all the commits that have been made. If we want to check one in particular it is possible to see what changes have been made with respect to the previous one, by clicking on the commit description:
+
+![List Commits History  - Screen](./media/show_commits_list.png)  
+
+### Collaboration
+
+A key element in developing work with version control platforms and tools is that they are designed for collaboration. To this end, we can add collaborating members with different profiles. To do this you can access from the side menu *Project -> Members*.
+
+![Select include members](./media/select_include_members.png)  
+
+From the following screen we can add members to our repository by searching for them by e-mail or by user name. We can also select the role: *Guest*, *Reporter*, *Maintainer* or *Developer*.
+
+![Add new members](./media/add_new_member.png)  
+
+You can try to include the user: **manuparra**
+
+
+### Issue Tracker
+
+The Issue Tracker is the place to add things that need to be improved or solved in a project that you are developing or that you are using. Issues can be bugs, tasks or ideas to be discussed. Also, issues are searchable and filterable. 
+
+To access it, you can select from the left side menu Issues List:
+
+![Select Issues](./media/select_issues_list.png)
+
+Then, if it is the first issue to write, you can do it from the *New Issue* button:
+
+![Select add issue button](./media/select_new_issue_button.png)
+
+The next screen is where you can include all the data of the Issue, from the name, description, issue assignment etc. to the deadline or weight of the issue.
+
+![Add issue button](./media/add_new_issue.png)
+
 
 
 
