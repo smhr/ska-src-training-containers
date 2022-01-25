@@ -46,16 +46,17 @@ Git is one of many version control systems available. It is arguably one of the 
 
 We will not be running any commands in this part just yet. Before we do that, there are a few concepts specific to Git that you have to be familiar with:
 
-- **[git] repository/repo**
+- **[git] repository/repo** - what this can mean can be different to what it **actually** means. Repository is the `.git` directory inside your working folder, which contains all the required repository files. Quite often though, when someone refers to 'a repository' they mean the whole folder which contains the files you are working on.
 - **3 stages of your repository:**
   - ***modified*** - you made changes to some of your files, you saved them with your editor of choice (e.g. vim), but Git is not yet aware of them. It detects that something changed, but has not yet stored it in its long-term memory (a database)
   - ***staged*** - you tell Git which changes should be stored in the database next (you stage these files)
-  - ***commited*** - Git takes all the staged files you ordered it to keep track of and stores their snapshots (how they look at that point in time) into the database
+  - ***committed*** - Git takes all the staged files you ordered it to keep track of and stores their snapshots (how they look at that point in time) into the database
   
   Your workflow with Git should generally look something like this:
   ![Git workflow](media/git_stages.png)
-- **branch**
-- **main/master branch**
+  (Image from the [**Pro Git book by Scott Chacon and Ben Straub**](https://git-scm.com/book/en/v2), released under [**Creative Commons Attribution Non Commercial Share Alike 3.0 license**](https://creativecommons.org/licenses/by-nc-sa/3.0/#) )
+- **branch** - most of the time, code development is not linear: you change some things in one place, add a feature in another and maybe remove something in a completely different file. What if you have multiple collaborators working on separate features? In such a situation, they can all work on their own, personal versions of the code (branches), not modifying everyone else's contributions and possibly the production-ready code.
+- **main/master branch** - this is the branch you want the world to see and use. It should only include files that you are confident other people will be able to use and use them without major issues. It should contain production-ready and working code **only** - if you need to add and test a new feature, create a separate branch for it.
 
 ## 3. Creating and getting a Git repository
 So you have a new codebase or a ducment that you have just started working on and decided to start using Git to keep tract of all the changes you make. As we have already mentioned, it is eas yto start using Git and you need only a single command to initialise it for your project (yes, it's really that easy). If can go to your project's directory and run the following command:
