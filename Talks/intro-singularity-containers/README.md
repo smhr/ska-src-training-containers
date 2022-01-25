@@ -118,7 +118,7 @@ Confirms you have a file named: `lolcow_latest.sif`:
 ls -l lolcow_latest.sif
 ```
 
-Then, we execute the image as an executable: 
+Then, we execute the image as an executable, simply typing: 
 
 ```
 vagrant@ska-training:~$ singularity run lolcow_latest.sif
@@ -132,5 +132,144 @@ vagrant@ska-training:~$ singularity run lolcow_latest.sif
                 ||     ||
 ```
 
+## Interact with images
+
+The commands listed here will work with image URIs and to accepting a local path to an image file.
+
+```
+vagrant@ska-training:~$ singularity pull docker://godlovedc/lolcow
+```
+
+### Entering the images from a shell
+
+The shell command allows you to open a new shell within your container and interact with it as though it were a small virtual machine. This would be very similar to what you do with docker and run a shell with bash (`docker run .... /bin/bash`):
+
+```
+vagrant@ska-training:~$  singularity shell lolcow_latest.sif
+```
+
+Once executed you will be connected to the container (see prompt):
+
+```
+Singularity lolcow_latest.sif:~> 
+```
+
+From here you can interact with container, and  you are the *same user* as you are on the host system.
+
+```
+Singularity lolcow_latest.sif:~> whoami
+
+manuparra
+
+Singularity lolcow_latest.sif:~> id
+
+uid=1000(manuparra) gid=1000(manuparra) groups=1000(manuparra),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lpadmin),126(sambashare)
+```
+
+**NOTE**
+
+If you use singularity with the shell option and and image from `library://`, `docker://`, and `shub://` URIs this creates an ephemeral container that disappears when the shell is exited.
+
+### Executing command from a container
+
+The exec command allows you to execute a custom command within a container by specifying the image file. For instance, to execute the cowsay program within the `lolcow_latest.sif` container:
+
+```
+vagrant@ska-training:~$ singularity exec lolcow_latest.sif cowsay ska
+ _____ 
+< ska >
+ -----
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+``` 
+
+### Running a container
+
+Singularity containers can execute runscripts. That is, they allow that when calling them from singularity with the exec option, they execute a scripts that define the actions a container should perform when someone runs it
+
+```
+vagrant@ska-training:~$ singularity run lolcow_latest.sif
+ _____________________________________
+/ You have been selected for a secret \
+\ mission.                            /
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+
+`run` also works with the `library://`, `docker://`, and `shub://` URIs. This creates an ephemeral container that runs and then disappears.
 
 
+## Interact with files
+
+**It is important to comment that a key feature is that from the container we have access to the host files in a transparent way.**
+
+For instance:
+
+```
+vagrant@ska-training:~$ singularity shell lolcow_latest.sif
+```
+
+And then if you type `ls -l`, you will see your own files from the folder you were. *You are in the container* :smile:. 
+
+So here, you can create a file:
+
+```
+Singularity lolcow_latest.sif:~> echo "This is a SKA training" > hello.txt
+```
+
+You can see the file created inside the container but it is also in your host folder.
+
+```
+Singularity lolcow_latest.sif:~> exit
+vagrant@ska-training:~$ ls -l
+...
+hello.txt
+...
+```
+
+**By default Singularity bind mounts `/home/$USER`, `/tmp`, and `$PWD` into your container at runtime.**
+
+## Build images
+
+And now the question is, how can I create my own container with my software?
+
+With `build` option you can convert containers between the formats supported by Singularity. And you can use it in conjunction with a Singularity definition file to create a container from scratch and customized it to fit your needs.
+
+
+### Downloading a container from Docker Hub
+
+You can use build to download layers from Docker Hub and assemble them into Singularity containers.
+
+```
+$ sudo singularity build lolcow.sif docker://godlovedc/lolcow
+```
+
+### Building containers from Singularity definition files
+
+Singularity definition files,  can be used as the target when building a container. Using the Docker equivalence, these would be the Dockerfile's we use to build an image.
+
+Here you can see an example of a definition file:
+
+```
+Bootstrap: docker
+From: ubuntu:16.04
+
+%post
+    apt-get -y update
+    apt-get -y install fortune cowsay lolcat
+
+%environment
+    export LC_ALL=C
+    export PATH=/usr/games:$PATH
+
+%runscript
+    fortune | cowsay | lolcat
+```
