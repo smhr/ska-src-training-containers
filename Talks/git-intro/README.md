@@ -97,28 +97,31 @@ When you `clone` a git repository, you do not have to run the `git init` again -
 
 ## 4. Changing a Git repository
 
-Just having a repository dost not change much - we need to make sure that Git keeps track of changes to important files and that these changes are stored safely. We can now check the status of our new Git repository (make sure you are inside the freshly initialised or cloned repoitory) with:
-`git status`
-and your output may look something like that (this is the output I got after running the above command inside the freshly-cloned git repository):
-```
+Just having a repository does not change much - we need to make sure that Git keeps track of changes to important files and that these changes are stored safely. We can check the status of our new Git repository (make sure you are inside the working directory) with:
+`git status` and your output may look something like that (this is the output I got after running the above command using the freshly-cloned git repository):
+
+```bash
 $ git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
 
 nothing to commit, working directory clean
 ```
+
 This is not very exciting. It's time we make some changes to this repository and commit them, i.e. we store these changes in the snapshot, effectively creating a backup of your changes. Don't worry, we won't be actually breaking the official Git repository - all of our changes will be local.
 
-Let's add a new file with your editor of choice, with a short message inside it (feel free to be more adventerous that that):
-```
+Let's add a new file with your editor of choice, with a short message inside it (feel free to be more adventurous than that):
+
+```bash
 File hello.txt
 
 Hello world!
 
 ```
+
 So Git is keeping track of this file, right? Not exactly! Let's see what happens if we run the `git status` command again:
 
-```
+```bash
 $ git status
 On branch master
 Your branch is up-to-date with 'origin/master'.
@@ -126,13 +129,14 @@ Your branch is up-to-date with 'origin/master'.
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-	hello.txt
+  hello.txt
 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-So Git knows that there is a new file present (`hello.txt`), but the file is in an **utracked** state. These are the files that are not stored by Git as part of your repository history. Git knows about them, but doesn't really care about keeping track of changes you make to these files. The above output is helpful not only in the way that it shows us which files are urrently not being tracked by Git, but also how to instruct Git to keep tract of this file from now on. We can explicitly add our file to the list of tracked files using command (and then checking the status of the repository):
-```
+So Git knows that there is a new file present (`hello.txt`), but it is currently in an **utracked** state. These are the files that are not stored by Git as part of your repository history. Git knows about them, but doesn't really care about keeping track of changes you make to these files. The above output is helpful not only in the way that it shows us which files are currently not being tracked by Git, but also how to instruct Git to keep track of our new file from now on. We can explicitly add our file to the list of tracked files using the following command (and then checking the status of the repository):
+
+```bash
 $ git add hello.txt
 
 $ git status
@@ -142,23 +146,24 @@ Your branch is up-to-date with 'origin/master'.
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
-	new file:   hello.txt
+  new file:   hello.txt
 ```
 
-I hope you can easily see the difference! Our file is no longer untracked, but instead will be commited the next time we record changes to our repository (the file is now ***staged***).
+I hope you can see the difference! Our file is no longer untracked, but instead will be committed the next time we record changes to our repository (the file is now ***staged***).
 
-This change is however not permanently added to te repository history yet! To do that, we have to explicitly ***commit** the changes:
+This change is however not permanently added to the repository history yet! To do that, we have to explicitly ***commit** the changes:
 
-```
+```bash
 $ git commit -m "Commit message"
 ```
-The commit message is a short description of the changes that have been made to the repository since the last commit. In our case, we hav eadded a single, very short file, so an equally short commit message *"Added a hello.txt file"* will suffice. However, if you are working on a larger project, possibly with multiple other developers and researchers, you will want to make your commit messages as informative as possible, to makse sure everyone can understand the changes made to the code without the need to dig through the source code unnecessariyl. Even if you are working on your own, **you will** forget all details after some time. It is always a good practice to include a short title for a commit and then underneath it to write a short paragraph detailing all the changes made in this commit.
 
-If you ommit the `-m` option, Git will open the configured text editor of your choice where you can type your commit message. This is especially useful if you write descriptive commit messages as described above.
+The commit message is a short description of the changes that have been made to the repository since the last commit. In our case, we have added a single, very short file, so an equally short commit message *"Added a hello.txt file"* will suffice. However, if you are working on a larger project, possibly with multiple other developers and researchers, you will want to make your commit messages as informative as possible, to make sure everyone can understand the changes made to the files without the need to dig through the source code unnecessarily. Even if you are working on your own, **you will** forget all the details after some time. It is always a good practice to include a short title for a commit and then underneath it to write a short paragraph detailing all the changes made in this commit.
 
+If you omit the `-m` option, Git will open the configured text editor of your choice where you can type your commit message. This is especially useful if you write descriptive commit messages as described above.
 
-Now that we have commited our first changes to the repository, we can keep on working on it. Let's say I no longer want to just welcome the world, but would also like to pay it a small compliment:
-```
+Now that we have committed our first changes to the repository, we can keep on working on it. Let's say I no longer want to just welcome the world, but would also like to pay it a small compliment:
+
+```bash
 File hello.txt
 
 Hello beautiful world!
@@ -173,16 +178,16 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)
 
-	modified:   hello.txt
+  modified:   hello.txt
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
 
-We told Git to keep track of this file and add to our commits, but now the file is not staged even though we explicitly told Git to track it? This is an important point! Git knows it has to keep track of these files, but they will not be commited automatically every time we make changes to them. And this is for a good reason. Imagine you work on multiple files at once, but only really want to commit changes to one file at a time, e.g. you want to have a clear history of your changes. By not autmatically adding all the tracked files into the mext commit, you don't have to keep on moving or removing your files, depending on which specific file you want to commit at a given point in time.
+We told Git to keep track of this file and add to our commits, but now the file is not staged even though we explicitly told Git to track it? This is an important point! Git knows it has to keep track of these files, but they will not be committed automatically every time we make changes to them. And this is for a good reason. Imagine you work on multiple files at once, but only really want to commit changes to one file at a time, e.g. you want to have a clear history of your changes. By not automatically adding all the tracked files into the next commit, you don't have to keep on moving or removing your files, depending on which specific file you want to commit at a given point in time.
 
-So now our `hello.txt` file is ***modified** but not yet staged. We can again run the `git add hello.txt` command to stage it manually, but this can get cumbersome if we want to include all of the modified files in the next commit. Instead, we can use an extra option for our `git commit command`:
+So now our `hello.txt` file is ***modified** but not yet staged. We can again run the `git add hello.txt` command to stage it manually, but this can get cumbersome if we want to include all of the modified files in the next commit. Instead, we can use an extra option for our `git commit` command:
 
-```
+```bash
 $ git commit -a -m "Updated the hello.txt" file"
 ```
 
