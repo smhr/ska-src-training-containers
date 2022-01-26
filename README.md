@@ -12,9 +12,9 @@ Main webpage can be found in this [Indico event](https://indico.skatelescope.org
 
 Registration is open here: [registration](https://indico.skatelescope.org/event/876/registrations/339/)
 
-### Scientific programme
+### Timetable
 
-Scientific programme can be found here: [programme](https://indico.skatelescope.org/event/876/program)
+Timetable can be found here: [timetable](https://indico.skatelescope.org/event/876/timetable/#20220127)
 
 **Thursday 27/1/22:** technical support to get everything installed
 
