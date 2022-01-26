@@ -54,7 +54,7 @@ TBD
 - Introduction to Git - Mateusz Malenta (University of Manchester)
 - Introduction to Github/Gitlab - Javier Moldón (IAA-CSIC)
 - Hands-on GitLab - Manuel Parra (IAA-CSIC)
-- Introduction to docker/singularity containers - Manuel Parra (IAA-CSIC) and Mateusz Malenta (University of Manchester)
+- [./Talks/intro-singularity-containers/README.md](Introduction to docker/singularity containers)  - Manuel Parra (IAA-CSIC) and Mateusz Malenta (University of Manchester)
 - Hands-on on Git and Containers - Alex Clarke (SKAO) and Manuel Parra (IAA-CSIC)
 - Intermediate Github: pull requests/command line - Javier Moldón (IAA-CSIC)
 - Building your own custom containers - Mateusz Malenta (University of Manchester)
