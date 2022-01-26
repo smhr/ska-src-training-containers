@@ -1,3 +1,7 @@
+# Introduction to Singularity containers
+
+[[_TOC_]]
+
 ## Objectives and scope
 
 In this tutorial we will work with a containerization system called Singularity, which has many features that make it interesting for workflow development and long-term reproducibility.
