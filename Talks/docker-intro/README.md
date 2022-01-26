@@ -158,80 +158,53 @@ For more examples and ideas, visit:
     In this case we use the **image name** and Docker prints out the confirmation that it was removed successfully.
 
 ## 3. Managing Docker containers
-* **Examine currently runninng containers**
+
+- **Examine currently running containers**
 
     In the same way we listed the images currently available locally on our machine, we can examine currently running containers:
+
     ```docker
     $ docker container ls
-    ```
-    If you execute this command after launching our first container you will see...
-    ```docker
     CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
     ```
-    nothing really. This means there are no containers running at this moment
-    in time. 
-    
-    When we launched our `hello-world` container above, it started, it
-    did the job it was designed to do and it stopped immediately. In the case
-    of the `hello-world` image, the designers decided it should print out a helpful
-    output once the container is launched successfully, but that may not always 
-    be the case. 
-    
+
+    We see nothing really useful. This means there are no containers running at this moment in time.
+
+    When we launched our `hello-world` container above, it started, it did the job it was designed to do and it stopped immediately. In the case of the `hello-world` image, the designers decided it should print out a helpful output once the container is launched successfully, but that may not always be the case.
+
     We still have an option to check whether our container was started at all. We can force Docker to list *all* the containers with the extra `-a` option:
-    ```
+
+    ```docker
     $ docker container ls -a
     CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                    PORTS     NAMES
     7dd021096f75   hello-world             "/hello"                 3 hours ago    Exited (0) 3 hours ago              trusting_herschel
 
     ```
-    In this case we actually get some useful information about our container 
-    we have just run. We see that we
-    launched the container, it run and it exited with code 0, meaning a
-    successful, error-free execution. We can also see when the container was
-    created and when it completed its execution. As you have seen, we get the
-    results from the `hello-world` container pretty much immediately, and
-    therefore the `CREATED` and `Exited` times are the same, but generally this
-    is not the case. 
-    
-    Every container has
-    a "human-readable" name assigned to it at launch. It makes it easier to
-    refer to the container using that name instead of the container ID, listed
-    in the first column of the above output. These names are randomly generated
-    from a list of adjectives and famous scientists and Docker
-    does not guarantee the name will repeat for the same container (it is
-    extremely unlikely your container will have the same name as the one
-    listed above).
-    
-    It is therefore important to provide a memorable name with
-    the `run` command using `--name` option to ensure reproducible and
-    predictable deployment. This is especially important when you run multiple 
-    containers at the same time, e.g. making it easy to differentiate front- and 
-    backend Node-based containers that can have the same underlying image, or 
-    rely on scripts and want to have predictable parameters.
 
-    If you are running containers right now, you will see them as "Up", as
-    below
+    In this case we actually get some useful information about our container we have just run. We see that we launched the container, it ran and it exited with code 0, meaning a successful, error-free execution. We can also see when the container was created and when it completed its execution. As you have seen, we get the results from the `hello-world` container pretty much immediately, and therefore the `CREATED` and `Exited` times are the same, but generally this is not the case.
+
+    Every container has a "human-readable" name assigned to it at launch. It makes it easier to refer to the container using that name instead of the container ID, listed in the first column of the above output. These names are randomly generated from a list of adjectives and famous scientists and Docker does not guarantee the name will repeat for the same container (it is extremely unlikely your container will have the same name as the one listed above).
+
+    It is therefore important to provide a name with the `run` command using the `--name` option to ensure reproducible and predictable deployment. This is especially important when you run multiple  containers at the same time, e.g. making it easy to differentiate front- and backend Node-based containers that can have the same underlying image, or rely on automatic scripts that require predictable names.
+
+    If you are running containers right now, you will see them as "Up", as below
+
     ```docker
     $ docker container ls -a
     CONTAINER ID   IMAGE            COMMAND                  CREATED        STATUS         PORTS     NAMES
     f1d9fa05caae   rabbitmq:3.8.2   "docker-entrypoint.s…"   2 months ago   Up 5 minutes             rabid_rabbit
+    ```
 
-    * **Remove the container**
+- **Remove the container**
 
-    Exited containers
-    can be thought of as being hibernated - they are not running, their
-    internal state is saved and they can be woken up and run again. 
-    When we are satisfied with the results provided by our container launch, 
-    we might need to remove it.
-    We can do this with the help of `container rm` command:
+    Exited containers can be thought of as being hibernated - they are not running, their internal state is saved and they can be woken up and run again. When we are satisfied with the results provided by our container launch,  we might need to remove it. We can do this with the help of `container rm` command:
 
     ```docker
     $ docker container rm trusting_herschel
+    trusting_herschel
     ```
-    Here we used the Docker-assigned name to remove the container. We can
-    also use the container ID to achieve the same result. Make sure you replace
-    the name above with the name or the container ID that you got by running
-    the `docker container ls -a` command.
+
+    Here we used the Docker-assigned name to remove the container. We can also use the container ID to achieve the same result. Make sure you replace the name above with the name or the container ID that you got by running the `docker container ls -a` command.
 
 ## 4. Working with Docker containers
 Using a `hello-world` image is one thing, actually doing some work with containers is another. As interesting as it might be, the above image doesn't do much beyond printing out the message we have seen at the start. Not very useful from the astrophysics perspective. 
