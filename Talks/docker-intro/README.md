@@ -178,7 +178,6 @@ For more examples and ideas, visit:
     $ docker container ls -a
     CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                    PORTS     NAMES
     7dd021096f75   hello-world             "/hello"                 3 hours ago    Exited (0) 3 hours ago              trusting_herschel
-
     ```
 
     In this case we actually get some useful information about our container we have just run. We see that we launched the container, it ran and it exited with code 0, meaning a successful, error-free execution. We can also see when the container was created and when it completed its execution. As you have seen, we get the results from the `hello-world` container pretty much immediately, and therefore the `CREATED` and `Exited` times are the same, but generally this is not the case.
@@ -207,47 +206,58 @@ For more examples and ideas, visit:
     Here we used the Docker-assigned name to remove the container. We can also use the container ID to achieve the same result. Make sure you replace the name above with the name or the container ID that you got by running the `docker container ls -a` command.
 
 ## 4. Working with Docker containers
-Using a `hello-world` image is one thing, actually doing some work with containers is another. As interesting as it might be, the above image doesn't do much beyond printing out the message we have seen at the start. Not very useful from the astrophysics perspective. 
 
-We are going to experiment with a much more useful image: an official Python 3.10.2 image based on Debian bullseye (it's slimmed down version to be more specific - 123MB vs over 900MB for the 'traditional' bullseye).
+Using a `hello-world` image is one thing, actually doing some work with containers is another. As interesting as it might be, the above image doesn't do much beyond printing out the message we have seen at the start. Not very useful from the astrophysics perspective.
 
-Instead of just running the image, we fill first download it:
+We are going to experiment with a much more useful image: an official Python 3.10.2 image based on Debian bullseye (it's a slimmed down version to be more specific - 123MB vs over 900MB for the 'traditional' bullseye).
 
-```
+Instead of just running the image, we fill first pull it:
+
+```docker
 $ docker image pull python:3.10.2-slim-bullseye
+3.10.2-slim-bullseye: Pulling from library/python
+a2abf6c4d29d: Pull complete 
+27003db43ed4: Pull complete 
+a41b33cb9814: Pull complete 
+6ed4b1851bbe: Pull complete 
+51db3bf96e69: Pull complete 
+Digest: sha256:e7adb53c5bb371c55148dfea3c4a72f34d047c87e89b8958f8da759abe9c3f1e
+Status: Downloaded newer image for python:3.10.2-slim-bullseye
+docker.io/library/python:3.10.2-slim-bullseye
 ```
 
-If we just run it, we won't get any output like when using the `hello-wold` image (we will also explicitly test whether the container is running):
+If we just run it, we won't get any output like when using the `hello-world` image (we will also explicitly test whether the container is running):
 
-
-```
+```docker
 $ docker container run --name python-test python:3.10.2-slim-bullseye
 
 $ docker container ls -a
 CONTAINER ID   IMAGE                         COMMAND                  CREATED          STATUS                      PORTS     NAMES
 67b36e6034d2   python:3.10.2-slim-bullseye   "python3"                27 seconds ago   Exited (0) 22 seconds ago             python-test
 ```
-The container exits immediately, just like the `hello-world` one. That's because by default, there is no work to be done inside this container. We can change that. We can remove the container like we have done before, but this time, we can use the name we have provided explicitly with `--name` flag (I used `python-test`, feel free to name your container something else, just make sure you change the name in the commands that use it).
 
-```
+The container exits immediately, just like the `hello-world` one. That's because by default, there is no work to be done. We can change that. We can remove the container like we have done before, but this time, we can use the name we have provided explicitly with `--name` flag (I used `python-test`, feel free to name your container something else, just make sure you change the name in the commands that use it).
+
+```docker
 $ docker container rm python-test
+python-test
 ```
 
 I removed this container because I want to reuse the name and also keep my Docker containers to bare minimum. We can use the same image to actually start executing some code from INSIDE the running container. We will start slowly, I want to find out a version of Python available inside the running container:
 
-``` 
+``` docker
 $ docker container run --name python-test python:3.10.2-slim-bullseye python3 --version
 Python 3.10.2
 ```
 
-That's the version we expected to see based on the image we're using. Most importantly, this is version that is shipped inside this Python image and executed inside our container. You do not have to have Python installed on your host machine, or can have a completely different version (for example I am running 3.8.5 on my host) - Python inside your container is not eve aware of that other version.
+That's the version we expected to see based on the image we're using. Most importantly, this is the version that is shipped inside this Python image and executed inside our container. You do not have to have Python installed on your host machine, or can have a completely different version (for example I am running 3.8.5 on my host) - Python inside your container is not even aware of that other version.
 
 But let's do some actual work. We will do it in two ways. First we will launch a very simple script that you can download from **here**. You do not have to be familiar with Python to understand what it does: we simply print out a welcome message and perform some very basic operations.
 
 As we have mentioned before, containers by default do not know much about their host machine. Most importantly, they do not share any files with it, so they will not be able to find our Python script and run it. We therefore have to make it available inside the container.  We launch our image it with the additional options that *mount* the data inside the container:
 
-```
-docker container run --name python-test-2 --mount type=bind,source=$(pwd),target=/scripts python:3.10.2-slim-bullseye python3 /scripts/script.py
+```docker
+$ docker container run --name python-test-2 --mount type=bind,source=$(pwd),target=/scripts python:3.10.2-slim-bullseye python3 /scripts/script.py
 Welcome to Docker Python
 8
 13
@@ -255,47 +265,29 @@ Welcome to Docker Python
 0.5
 We  are  done!
 ```
-The `--mount` option may seem a bit verbose if you have not seen it before,
-but it should be fairly easy to understand. First we specify the
-`type=bind` to tell Docker to use a bind mount (it is not the only type of
-mount we can have, but we are not going to cover them here). We then 
-provide two [key]:[value] pairs separated by a comma ( , ) that specify
-the source and target directory and/or file. As we are using distinctive keys,
-the order of the pairs is not important, but try to keep it in some
-order for consistency. 
 
-Here we make only a single file available inside the
-container, but it is also possible to make whole directories available
-and bound to a directory inside your container.
+The `--mount` option may seem a bit verbose if you have not seen it before, but it should be fairly easy to understand. First we specify the `type=bind` to tell Docker to use a bind mount (it is not the only type of mount we can have, but we are not going to cover them here). We then provide two [key]:[value] pairs separated by a comma ( , ) that specify the source and target directory and/or file. As we are using distinctive keys, the order of the pairs is not important, but try to keep it in some order for consistency.
 
-**IMPORTANT:** bind mounts do not create a copy of the data! Your data is
-shared between your host and container environments. Any changes that you
-make to your data on the host side, will be visible inside the container
-and vice versa. Be careful if you are manipulating any data that you cannot
-afford to corrupt - it might be safer to make a copy in this case!
+Here we make only a single file available inside the container, but it is also possible to make whole directories available and bound to a directory inside your container.
 
-Making data available inside your container at a runtime has some obvious
-drawbacks. With that approach, your data and your software are no longer
-placed in a single environment. You have to rely on your end-users to 
-provide their own data or to be able to access your data from external
-sources. This can also increase the development time for your software, as
-you have to take into account and prevent errors that users can introduce
-if their data does not meet your requirements.
-The decision on whether to include the data inside your image
-during the build time or as a mount during the runtime will be entirely
-up to you and will depend on your project and user requirements.
+**IMPORTANT:** bind mounts do not create a copy of the data! Your data is shared between your host and container environments. Any changes that you make to your data on the host side, will be visible inside the container and vice versa. Be careful if you are manipulating any data that you cannot afford to corrupt - it might be safer to make a copy in this case!
 
-Second approach can be running our image *interactively*. In this case our container will behave like a usual Python CLI interpreter and we can treat it as such. 
-```
-docker container run --name python-test-3 -it python:3.10.2-slim-bullseye
+Making data available inside your container at a runtime has some obvious drawbacks. With that approach, your data and your software are no longer placed in a single environment. You have to rely on your end-users to  provide their own data or to be able to access your data from external sources. This can also increase the development time for your software, as you have to take into account and prevent errors that users can introduce if their data does not meet your requirements. The decision on whether to include the data inside your image during the build time or as a mount during the runtime will be entirely up to you and will depend on your project and user requirements.
+
+Second approach can be running our image *interactively*. In this case our container will behave like a usual Python CLI interpreter and we can treat it as such.
+
+```docker
+$ docker container run --name python-test-3 -it python:3.10.2-slim-bullseye
 Python 3.10.2 (main, Jan 18 2022, 20:00:03) [GCC 10.2.1 20210110] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> print("I'm inside the container")
 I'm inside the container
 ```
-However, we are not limited to running just Python. This particular image comes with bash installed, so we can make use of it. We can launch an ibteractive bash session and treat this container like a regular terminal (albeit with many things missing):
-```
-docker container run --name python-test-4 -it python:3.10.2-slim-bullseye /bin/bash
+
+However, we are not limited to running just Python. This particular image comes with bash installed, so we can make use of it. We can launch an interactive bash session and treat this container like a regular terminal (albeit with many things missing):
+
+```docker
+$ docker container run --name python-test-4 -it python:3.10.2-slim-bullseye /bin/bash
 root@2decf291ee44:/# pwd
 /
 root@2decf291ee44:/# ls -l
@@ -307,21 +299,16 @@ drwxr-xr-x   1 root root 4096 Jan 22 23:35 etc
 drwxr-xr-x   2 root root 4096 Dec 11 17:25 home
 ...
 ```
+
 This way you can just containers not just for one-off jobs, but also use it for interactive work.
 
-**IMPORTANT:**  Launching our container the way we did just now
-may seem innocent enough, but comes with a **serious security problem**.
-If you look closely at the command line prompt, we are listed as a use `root`, meaning we have administrative privileges inside the container. This becomes a very serious issue if we give our container access to any external resources such as host disks or network. We usually do not perform our day-to-day activities with privileged accounts and we shouldn't do that inside our containers either.
+**IMPORTANT:**  Launching our container the way we did just now may seem innocent enough, but comes with a **serious security problem** If you look closely at the command line prompt, we are listed as a user `root`, meaning we have administrative privileges inside the container. This becomes a very serious issue if we give our container access to any external resources such as host disks or network. We usually do not perform our day-to-day activities with privileged accounts and we shouldn't do that inside our containers either.
 
 We can change this default behaviour by providing a `--user` flag to our `run` command:
 
-```
-docker container run --user 1000:1000 --name python-test-5 -it python:3.10.2-slim-bullseye /bin/bash
+```docker
+$ docker container run --user 1000:1000 --name python-test-5 -it python:3.10.2-slim-bullseye /bin/bash
 I have no name!@46023ae04069:/$
 ```
 
- We have launched a new container with user ID 1000 and
-group ID 1000 (the format is `--user [user ID]:[group ID]`). As we have not
-created this user inside the container, Docker has no idea who that user is
-exactly, but we can still perform various tasks with the same permissions
-as the original user on the host OS.
+We have launched a new container with user ID 1000 and group ID 1000 (the format is `--user [user ID]:[group ID]`. As we have not created this user inside the container, Docker has no idea who that user is exactly, but we can still perform various tasks with the same permissions as the original user on the host OS.
