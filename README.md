@@ -43,8 +43,7 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 ## Get everything installed 
 
-TBD
-
+In this [link](https://ska-telescope.gitlab.io/src/ska-src-training-containers/) you can find all the instructions to set up the SKA training environment.
 
 
 ## Talks
