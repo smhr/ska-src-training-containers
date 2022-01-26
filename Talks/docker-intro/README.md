@@ -89,30 +89,17 @@ For more examples and ideas, visit:
 
 ## 2. Managing Docker images
 
-* **Examine local images**
+- **Examine local images**
 
-    How does Docker know whether it has to download the image or that the 
-    image is already present on your computer? Can you have this knowledge as
-    well? Docker keeps track of all the images and layers that you download.
-    There usually is a directory on your system which contains all the
-    currently downloaded images and the associated SHA256 keys used to identify
-    them. This ensures that the same layer or image is not downloaded twice and can be reused
-    if necessary. For an in-depth description on how Docker stores images, please refer to
-    [**this help guide**](https://docs.docker.com/storage/storagedriver/).
-    
-    The placement and structure of relevant directories can be
-    different depending on your Docker installation and require root
-    permissions to access. There is however a short command that lists all the
-    locally available images:
+    How does Docker know whether it has to download the image or that the image is already present on your computer? Can you have this knowledge as well? Docker keeps track of all the images and layers that you download. There usually is a directory on your system which contains all the currently downloaded images and the associated SHA256 keys used to identify them. This ensures that the same layer or image is not downloaded twice and can be reused if necessary. For an in-depth description on how Docker stores images, please refer to [**this help guide**](https://docs.docker.com/storage/storagedriver/).
+
+    The placement and structure of relevant directories can be different depending on your Docker installation and require root permissions to access. There is however a short command that lists all the locally available images:
 
     ```docker
     $ docker image ls
     ```
 
-    Depending on how long (if at all) you have been using Docker for, the
-    output will show only a single image that we have used above or multiple 
-    (as many as few tens of) images, as seen below (this is what I see when I
-    run the above command on my work PC - **you will see something different**)
+    Depending on how long (if at all) you have been using Docker for, the output will show only a single image that we have used above or multiple (as many as few tens of) images, as seen below (this is what I see when I run the above command on my work PC - **you will see something different**)
 
     ```docker
     REPOSITORY                 TAG                      IMAGE ID       CREATED         SIZE
@@ -143,45 +130,22 @@ For more examples and ideas, visit:
     $ docker image ls hello-world
     ```
 
-    or even use wildcards if you are not sure about the full image name
-    (was it `hello-world` or `hello_world`?):
+    or even use wildcards if you are not sure about the full image name (was it `nvidia/cuda` or `nvidia/CUDA`?):
 
     ```docker
-    $ docker image ls hello*
+    $ docker image ls nvidia/*
+    REPOSITORY    TAG         IMAGE ID       CREATED        SIZE
+    nvidia/cuda   10.1-base   bfa75f8b799e   6 months ago   105MB
+    nvidia/cuda   9.2-base    5eabb7ffec15   6 months ago   80.7MB
     ```
 
-    We can now examine in detail the output of one of the above commands:
+    This is the default output that tells us that there are two images starting with `nvidia/` available locally on our machine, with the `9.2-base` and `10.1-base` tags. You can treat the tags as an extra bit of information about the version of the image. Next comes the image ID, which is a shortened version of the SHA256 key (or digest, using Docker vocabulary) used to identify the image and information on when the image was created. This information refers to when the image was first built and not pulled.
 
-    ```docker
-    REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
-    hello-world   latest    d1165f221234   3 months ago   13.3kB
-    ```
+    We have used the most basic version of the image listing command, with the exception of using wildcards. For a complete reference and advanced examples, such as formatting and filtering, please visit [**this docker images reference**](https://docs.docker.com/engine/reference/commandline/images/). **Quick note:** the above document refers to a `docker images` command, which is *an alias* to the full `docker image ls` command. All the options however will work with both versions of this command. You can still use it as a reference for the `--format` and `--filter` options.
 
-    This output tells us that there is a single image starting with the word `hello` available locally on our machine (`hello-world` to be exact), with the `latest` tag. 
-    For now just treat them as an extra bit of information about the version of the image.
-    Next comes the image ID, which is a shortened version of the SHA256 key (or digest, 
-    using Docker vocabulary) used to identify the image, information on when the image was
-    created. This information refers to when the image was first built and not pulled - this 
-    particular image was created 3 months ago, even though
-    I had downloaded it only 2 minutes before pasting this output in the
-    snipped above. At the end, the size of the image is shown. 
+- **Remove the image**
 
-    We have used the most basic version of the image listing command, with the
-    exception of using wildcards. For a complete reference and advanced examples, 
-    such as formatting and filtering, please visit
-    [**this docker images reference**](https://docs.docker.com/engine/reference/commandline/images/).
-    **Quick note:** the above document refers to a `docker images` command,
-    which is *an alias* to the full `docker image ls` command. All the options
-    however will work with both versions of this command. You can still use it as
-    a reference for the `--format` and `--filter` options.
-
-* **Remove the image**
-
-    We made sure that the container was no longer running and then we removed it. 
-    What if we want to go one step further and want to get rid of
-    the underlying image? Docker has a fairly
-    intuitive command for that as well - instead of removing a container, we
-    tell it to remove the image instead:
+    We made sure that the container was no longer running and then we removed it. What if we want to go one step further and want to get rid of the underlying image? Docker has a fairly intuitive command for that as well - instead of removing a container, we tell it to remove the image instead:
 
     ```docker
     $ docker image rm  hello-world
@@ -190,8 +154,8 @@ For more examples and ideas, visit:
     Deleted: sha256:d1165f2212346b2bab48cb01c1e39ee8ad1be46b87873d9ca7a4e434980a7726
     Deleted: sha256:f22b99068db93900abe17f7f5e09ec775c2826ecfe9db961fea68293744144bd
     ```
-    In this case we use the **image name** and Docker prints out the
-    confirmation that it was removed successfully.
+
+    In this case we use the **image name** and Docker prints out the confirmation that it was removed successfully.
 
 ## 3. Managing Docker containers
 * **Examine currently runninng containers**
