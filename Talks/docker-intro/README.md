@@ -1,12 +1,10 @@
-## Introduction to Docker
+# Introduction to Docker
 
-In this section you will learn the basics of Docker, 
-arguably one of the most popular containerisation technologies. 
-Since its initial release in 2013, Docker has been widely adopted in many areas of research and the ‘industry‘. It is used to provide access to e-commerce and streaming services, machine learning platforms, scientific pipelines (CERN, SKA, NASA).
+In this section you will learn the basics of Docker, arguably one of the most popular containerisation technologies. Since its initial release in 2013, Docker has been widely adopted in many areas of research and the ‘industry‘. It is used to provide access to e-commerce and streaming services, machine learning platforms and scientific pipelines (CERN, SKA, NASA).
 
-More generally, you should use it as a tool for distributing consistent software environments. Currently it is only one of many existing container technologies that researchers can choose from. Two popular alternatives are Singularity and Podman. Some solutions offer better support for High Performance Computing, while others provide a low-level control of the environment. There really is something for everyone.
+More generally, you should use it as a tool for distributing consistent software environments. Currently it is only one of many existing container technologies that researchers can choose from. Two popular alternatives are Singularity (covered later) and Podman. Some solutions offer better support for High Performance Computing, while others provide a low-level control of the environment. There really is something for everyone.
 
-### In this section you will learn
+## In this section you will learn
 
 - [**How to start Docker containers**](#1-running-first-docker-container)
 - [**How to manage your Docker images**](#2-managing-docker-images)
@@ -15,9 +13,7 @@ More generally, you should use it as a tool for distributing consistent software
 
 ## 1. Running first Docker container
 
-For our first exercise / example,
-we will run a short Docker command to download the *Hello World* of 
-**Docker images** and start our very first **Docker container**.
+For our first example, we will run a short Docker command to download the *Hello World* of **Docker images** and start our very first **Docker container**.
 
 ```docker
 
@@ -52,28 +48,19 @@ For more examples and ideas, visit:
 
 ```
 
-**<h3>Let's examine the command and the generated output step by step.</h3>**
+### **Let's examine the command and the generated output step by step.**
 
-* **The command that we execute**
+- **The command that we execute**
   
     ```docker
     $ docker container run hello-world
     ```
 
-    instructs Docker that we would like to start a container using a `hello-world`
-    image. This command can also be written as `docker run hello-world`, omitting 
-    the `container` part. This change was 
-    [**introduced in 2017**](https://www.docker.com/blog/whats-new-in-docker-1-13/)
-    with a major overhaul of the Docker CLI (Command Line Interface). If the version
-    of Docker installed on your machine, comes from before these changes were
-    introduced (we strongly recommend that you upgrade it due to security reasons),
-    the full command will not work and you will have to use the short version.
-    This course however is written with the new versions of Docker in mind and 
-    will **follow the convention of using the extended versions of the commands**.
+    instructs Docker that we would like to start a container using a `hello-world` image. This command can also be written as `docker run hello-world`, omitting the `container` part. This change was [**introduced in 2017**](https://www.docker.com/blog/whats-new-in-docker-1-13/) with a major overhaul of the Docker CLI (Command Line Interface). If the version of Docker installed on your machine comes from before these changes were introduced (we strongly recommend that you upgrade it due to security reasons), the full command will not work and you will have to use the short version. This section however is written with the new versions of Docker in mind and will **follow the convention of using the extended versions of the commands**.
 
-* **The next few lines**
+- **The next few lines**
 
-    ```
+    ```docker
     Unable to find image 'hello-world:latest' locally
     latest: Pulling from library/hello-world
     b8dfde127a29: Pull complete 
@@ -81,26 +68,18 @@ For more examples and ideas, visit:
     Status: Downloaded newer image for hello-world:latest
     ```
 
-    tells us that Docker was not able to find this image on our machine and 
-    has to download it from the external repository. If you have used this 
-    particular image in the past, you will not see any
-    information about Docker trying to download the image.
+    tells us that Docker was not able to find this image on our machine and has to download it from the external repository. If you have used this particular image in the past, you will not see any information about Docker trying to download the image.
 
     You could also separate the `docker container run ...` command above into two instructions:
+
     ```docker
     $ docker image pull hello-world
     $ docker container run hello-world
     ```
-    In this case we are very explicit and tell Docker to first download (pull) the
-    image from the external repository and then start the container based on
-    that image. If you already have the image on your host machine, you can
-    skip the `pull` command. In this case, including the `docker image pull` 
-    command separately can be seen as a bit redundant as Docker takes care of any missing
-    images with `docker container run`. You can however just pull the image
-    and not run it at all, or pull it when you have access to the Internet and 
-    later start the container when you are offline.
 
-* **The rest of the output**
+    In this case we are very explicit and tell Docker to first download (pull) the image from the external repository and then start the container based on that image. If you already have the image on your host machine, you can skip the `pull` command. In this case, including the `docker image pull` separately can be seen as a bit redundant as Docker takes care of any missing images with `docker container run`. You can however just pull the image and not run it at all, or pull it when you have access to the Internet and later start the container when you are offline.
+
+- **The rest of the output**
 
     The rest of the output is the most interesting part. It is an
     innocent-looking list, but as items 3 and 4 from that list explain, that
