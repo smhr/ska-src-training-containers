@@ -16,6 +16,8 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 Timetable can be found here: [timetable](https://indico.skatelescope.org/event/876/timetable/#20220127)
 
+### Scientific programme
+
 **Thursday 27/1/22:** technical support to get everything installed
 
 **Monday 31/1/22:** lessons and tutorials 
