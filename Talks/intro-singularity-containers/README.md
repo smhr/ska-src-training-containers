@@ -1,23 +1,21 @@
-# Introduction to Singularity containers
-
 [[_TOC_]]
 
-## Objectives and scope
+# Introduction to Singularity containers
 
+## Objectives and scope
 In this tutorial we will work with a containerization system called Singularity, which has many features that make it interesting for workflow development and long-term reproducibility.
 
-**Overall steps:**
+We will cover the following:
 
-What is singularity and what advantages does it have over Docker.
-Preparing the work environment
-Simple use of Singularity
-Create our first container
-Share your work!
+- Singularity and Docker
+- Preparing the work environment
+- Use of Singularity
+- Create our first container
+- Share your work!
 
-## What is singularity and what advantages does it have over Docker.
+## What is Singularity and what advantages does it have over Docker.
 
 Singularity is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible. You can build a container using Singularity on your laptop, and then run it on many of the largest HPC clusters in the world, local university or company clusters, a single server, in the cloud, or on a workstation down the hall. Your container is a single file, and you don’t have to worry about how to install all the software you need on each different operating system.
-
 
 
 **Advantages:**
@@ -25,7 +23,7 @@ Singularity is a container platform. It allows you to create and run containers 
 - Easy to learn and use (relatively speaking)
 - Approved for HPC (installed on some of the biggest HPC systems in the world)
 - Can convert Docker containers to Singularity and run containers directly from Docker Hub
-- SingularityHub!
+- [SingularityHub](https://cloud.sylabs.io/)
 
 
 **Disadvantages:**
@@ -71,14 +69,13 @@ Singularity also supports several different mechanisms for obtaining the images 
 A primary goal of Singularity is mobility. The single file image format makes mobility easy. Because Singularity images are single files, they are easily copied and managed. You can copy the image to create a branch, share the image and distribute the image as easily as copying any other file you control!
 
 
-
 ## Starting
 
 ### Preparing the work environment
 
 You will need a Linux system to run Singularity natively. Options for using Singularity on Mac and Windows machines, along with alternate Linux installation options are discussed in the installation guides.
 
-So after this part we assume that you have singularity installed for your system.
+So after this part we assume that you have Singularity installed for your system.
 
 ### The Singularity Usage Workflow
 
@@ -91,12 +88,12 @@ On the left side, you have your build environment: a laptop, workstation, or a s
 - develop and test containers using --sandbox (build into a writable directory) or --writable (build into a writable ext3 image)
 - build your production containers with a squashfs filesystem.
 
-And on the right side a consumer profile for containers.
+And on the right side, a consumer profile for containers.
 
 
 ### Singularity Commands
 
-To work with the singularity there are really only a few commands that provide us with all the operations:
+To work with the Singularity there are really only a few commands that provide us with all the operations:
 
 - `build` : Build a container on your user endpoint or build environment
 - `exec` : Execute a command to your container
@@ -138,24 +135,18 @@ vagrant@ska-training:~$ singularity run lolcow_latest.sif
 
 ## Interact with images
 
-The commands listed here will work with image URIs and to accepting a local path to an image file. This is an example as we've seen above
-
-```
-vagrant@ska-training:~$ singularity pull docker://godlovedc/lolcow
-```
-
 ### Using an image for SKA training
 
 We have prepared an image that is available in the Singularity image repository ( [link here](https://cloud.sylabs.io/library/manuparra/ska/skatrainingplot) ). This container image contains the following:
 
-- Creates a python framework that includes the python libraries: `scipy`, `numpy` and `mathplotlib`.
+- It creates a python framework that includes the python libraries: `scipy`, `numpy` and `mathplotlib`.
 - It includes a python application that draws a plot in a output file.
 
-The source code to generate is [here](link) (we will go on it later).
+The source code to generate it is located [here](link) (we will work on it later).
 
 ### Pulling the new image
 
-This download is around 300 MB.
+This download takes about 300 MBytes.
 
 ```
 vagrant@ska-training:~$ singularity pull library://manuparra/ska/skatrainingplot:latest
@@ -194,7 +185,7 @@ uid=900(vagrant) gid=900(vagrant) groups=900(vagrant),27(sudo)
 
 **NOTE**
 
-If you use singularity with the shell option and and image from `library://`, `docker://`, and `shub://` URIs this creates an ephemeral container that disappears when the shell is exited.
+If you use Singularity with the shell option and and image from `library://`, `docker://`, and `shub://` URIs this creates an ephemeral container that disappears when the shell is exited.
 
 ### Executing command from a container
 
@@ -280,9 +271,9 @@ ModuleNotFoundError: No module named 'numpy'
 
 ### Running a container
 
-Singularity containers can execute runscripts. That is, they allow that when calling them from singularity with the exec option, they execute a scripts that define the actions a container should perform when someone runs it.
+Singularity containers can execute runscripts. That is, they allow that when calling them from Singularity with the exec option, they execute a scripts that define the actions a container should perform when someone runs it.
 
-In this example for `lolcow_latest.sif` you can see a message, that is generated because for this container the developer has created a start point when you call singularity with the option `run`.
+In this example for `lolcow_latest.sif` you can see a message, that is generated because for this container the developer has created a start point when you call Singularity with the option `run`.
 
 ```
 vagrant@ska-training:~$ singularity run lolcow_latest.sif
@@ -308,6 +299,8 @@ SKA training: Git and Containers
 Plot generated in example.png by default, please provide an output plot file
 ```
 
+And now you can see that this command has generated an image called `example.png`.
+
 With this option we can run an application already predefined in the container, but this is not always the default option and depends on how the container was built.
 
 ```
@@ -316,6 +309,9 @@ vagrant@ska-training:~/builkd$ singularity run skatrainingplot_latest.sif myplot
 SKA training: Git and Containers
 Plot generated in myplotforska.png file.
 ```
+
+This command has generated an image called `myplotforska.png`.
+
 
 ## Interact with files
 
