@@ -22,7 +22,7 @@ WORKDIR /software
 RUN apt update && apt -y install git \
   && git clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
 
-CMD ./ska-src-training-containers/Talks/containers-build/files/hello_container.sh
+CMD ./ska-src-training-containers/Talks/containers-build/files/hello_docker.sh
 ```
 
 - **The first line**
@@ -56,17 +56,54 @@ CMD ./ska-src-training-containers/Talks/containers-build/files/hello_container.s
       && git clone git clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
     ```
 
-    The above line is exactly what you would run when installing software on your Debian-based machine, with the additional `RUN` instruction which tells Docker to execute the command and include the results in the
-    image. The outcome is not unexpected - our new image will have `git` installed and the repository for this course will be cloned into the `/software/ska-src-training-containers/` directory (we changed the directory for the `RUN` command with `WORKDIR` instruction above).
+    The above line is exactly what you would run when installing software on your Debian-based machine, with the additional `RUN` instruction which tells Docker to execute the command and include the results in the image. The outcome is not unexpected - our new image will have `git` installed and the repository for this course will be cloned into the `/software/ska-src-training-containers/` directory (we changed the directory for the `RUN` command with `WORKDIR` instruction above).
 
     We divide the command into multiple lines by using `\` (backslash), which tells Docker that these lines form a single `RUN` command. There is nothing stopping us from writing the whole command on a single line but that can produce unreadable Dockerfiles (like any badly-structured code).
 
-    Also note how we put all of our commands as part of the same `RUN` instruction. In principle, there is nothing stopping us from using multiple run instruction, but each `RUN` instruction creates a separate layer, which increases the size of the final image.
+    Also note how we put all of our commands as part of the same `RUN` instruction. We can use multiple run instructions, but each `RUN` instruction creates a separate layer, which can increase the size of the final image.
 
     ```docker
     RUN apt update && apt -y install git
     RUN git clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
     ```
+
+- **Let's actually run some software**
+
+    The last line
+
+    ```docker
+    CMD ./docker_tutorial/02_docker_into/scripts/hello_docker.sh
+    ```
+
+    tells Docker to execute the `hello_docker.sh` script when we launch our container using the `docker container run` command.
+
+### Let's build the image
+
+Now that our recipe is ready, we need to convert it into an image:
+
+```docker
+$ docker image build -f files/Dockerfile --tag docker-intro:v0.1 .
+Sending build context to Docker daemon  88.58kB
+Step 1/4 : FROM ubuntu:18.04
+ ---> 3339fde08fc3
+Step 2/4 : WORKDIR /software
+ ---> Running in eef9438e28cd
+Removing intermediate container eef9438e28cd
+ ---> e1b217f6b63c
+Step 3/4 : RUN apt update && apt -y install git     && git clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
+ ---> Running in 486d573d82f4
+```
+
+Here we instruct Docker daemon to take our Dockerfile we saved under `files/Dockerfile` (if you are currently in a different directory than the section root, make sure that you change the Dockerfile path accordingly) and use it to build an image called `docker-intro:v0.1`. We can name our Dockerfile however we want - there are no rigid naming conventions, but make sure that you use descriptive names. By default, Docker tries to use a Dockerfile simply called `Dockerfile` from the current directory. That is why we use `-f` option to `f`orce the use of our file.
+
+We then give our image a name consisting of the main name `docker-intro` and give it a version tag `v0.1`. If no tag is provided, Docker will use `latest` as the default tag. At the end comes the full stop `.`. It is actually a part of our `docker image build` command and you have to remember to include it. It is used to provide the *the build context*. Build context specifies files and resources that will be available during the build process and which we will be able to use. In the case of the command above we specify the current directory `.` as our build context. This makes all the files and directories present in it available to the Docker daemon during the building phase.
+
+We can then test the image by running it and checking the output:
+
+```bash
+$ docker container run --name test-docker docker-intro:v0.1
+Hello from inside Docker container!
+```
 
 ## 2. Building Singularity containers
 
