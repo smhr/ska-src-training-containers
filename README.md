@@ -8,36 +8,39 @@ This is the first event of a series that will drive the attendants to understand
 
 Main webpage can be found in this [Indico event](https://indico.skatelescope.org/event/876/overview)
 
-More details soon ...
-
 ### Registration
 
 Registration is open here: [registration](https://indico.skatelescope.org/event/876/registrations/339/)
 
-### Preliminary programme 
+### Scientific programme
+
+Scientific programme can be found here: [programme](https://indico.skatelescope.org/event/876/program)
 
 **Thursday 27/1/22:** technical support to get everything installed
 
-**Monday 31/1/22:** lessons and tutorials (around 3 hours in total, times TBC)
-- M. Massardi: Welcome, data handling challenges and portability 
-- P. Hartley: Introduction to the first SKA science data challenge & algorithm
+**Monday 31/1/22:** lessons and tutorials 
+- A. Bonaldi: General introduction
+- M. Massardi: Data Handling for SKA
+- P. Hartley: The SKA science data challenges 
 - M. Malenta: Introduction to Git
 - J. Moldon: Introduction to Github/Gitlab
-- M. Parra: Hands-on Gitlab
-- M. Parra, M. Malenta: Introduction to Docker/Singularity containers
-- A. Clarke: Hands on Git and Containers - Beginners
+- M. Malenta: Introduction to Containers
+- M. Malenta: Introduction to Docker
+- M. Parra: Introduction to Singularity
+- M. Parra: Hands-on: Gitlab
+- A. Clarke: Hands-on Containers (beginners)
 
-**Thursday 3/2/22:** availability for Q&A (extended time zone availability)
+**Thursday 3/2/22:** availability for Q&A
 
-**Monday 7/2/22:** lessons and tutorials (around 3 hours in total, times TBC)
-- Open Q&A to follow up on the issues found
-- J. Moldon: Intermediate Github - pull requests/command line
-- M. Malenta: Building your own custom containers
-- A. Clarke: Hands on Git and Containers - Intermediate
+**Monday 7/2/22:** lessons and tutorials
+- A. Bonaldi: Highlights of the training so far
+- J. Moldon: Intermediate Gitlab
+- M. Malenta: Building your own custom container
+- A. Clarke: Hands-on Containers (advanced)
 
-**Thursday 10/2/22:** availability for Q&A (extended time zone availability)
+**Thursday 10/2/22:** availability for Q&A 
 
-**Monday 14/2/22:** availability for Q&A (extended time zone availability)
+**Monday 14/2/22:** availability for Q&A
 
 # Training event materials 
 
@@ -45,19 +48,21 @@ Registration is open here: [registration](https://indico.skatelescope.org/event/
 
 In this [link](https://ska-telescope.gitlab.io/src/ska-src-training-containers/) you can find all the instructions to set up the SKA training environment.
 
-
 ## Talks
 
-- Introduction on data handling challenges and portability - Marcella Massarti (INAF)
-- Introduction to the first SKA science data challenge and algorithm - Philippa Hartley (SKAO)
+- Data handling for SKA - Marcella Massarti (INAF)
+- The SKA science data challenges - Philippa Hartley (SKAO)
 - Introduction to Git - Mateusz Malenta (University of Manchester)
 - Introduction to Github/Gitlab - Javier Moldón (IAA-CSIC)
-- Hands-on GitLab - Manuel Parra (IAA-CSIC)
-- [Introduction to docker/singularity containers](./Talks/intro-singularity-containers/README.md)  - Manuel Parra (IAA-CSIC) 
-- [Hands-on on Git and Containers](./Talks/hands-on-gitlab/README.md) -  Manuel Parra (IAA-CSIC)
-- Intermediate Github: pull requests/command line - Javier Moldón (IAA-CSIC)
-- Building your own custom containers - Mateusz Malenta (University of Manchester)
-- Intermediate git/docker - Alex Clarke (SKAO)
+- Introduction to Containers - Mateusz Malenta (University of Manchester)
+- Introduction to Docker - Mateusz Malenta (University of Manchester)
+- [Introduction to Singularity](./Talks/intro-singularity-containers/README.md) - Manuel Parra (IAA-CSIC)
+- [Hands-on: GitLab](./Talks/hands-on-gitlab/README.md) - Manuel Parra (IAA-CSIC)
+- Hands-on Containers (beginners) - A. Clarke (SKAO)
+- Highlights of the training so far - A. Bonaldi (SKAO)
+- Intermediate Gitlab - Javier Moldón (IAA-CSIC)
+- Building your own custom container - Mateusz Malenta (University of Manchester)
+- Hands-on Containers (advanced) - Alex Clarke (SKAO)
 
 
 
