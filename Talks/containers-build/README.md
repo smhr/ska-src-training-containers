@@ -107,7 +107,7 @@ Hello from inside Docker container!
 
 ## 2. Building Singularity containers
 
-We will now recreate the same recipe, but this time with Singularity. In this case, we are using a *Singularity definition file*. As before, we use this file to speficy a series of instructions that will install software, move the data, etc. to form our final container.
+We will now recreate the same recipe, but this time with Singularity. In this case, we are using a *Singularity definition file*. As before, we use this file to specify a series of instructions that will install software, move the data, etc. to form our final container.
 
 ```singularity
 Bootstrap: docker
@@ -130,7 +130,7 @@ From: ubuntu:18.04
     From: ubuntu:18.04
     ```
 
-    Your definition file should always have a header at the very beginning of the file. First we instruct the build system of the bootstrap agent. Think of it as a source of your base image. `Bootstrap` is also a required keyword and has to be present **on the first like of every definition file**. In the above definition file we let Singularity know that we would like to build our container based on a Docker image. THis is an important feature than makes transition from Docker to Singularity relatively easy - you can still use Docker images to not only run them with Singularity, but also use them as base layers in your definition files.
+    Your definition file should always have a header at the very beginning of the file. First we instruct the build system of the bootstrap agent. Think of it as a source of your base image. `Bootstrap` is also a required keyword and has to be present **on the first like of every definition file**. In the above definition file we let Singularity know that we would like to build our container based on a Docker image. This is an important feature that makes transitioning from Docker to Singularity relatively easy - you can still use Docker images to not only run them with Singularity, but also use them as base layers in your definition files.
 
     We again use a specific version of Ubuntu, the same one as with our Dockerfile. Feel free to experiment and use different versions of Ubuntu or even completely different operating systems!
 
@@ -153,7 +153,33 @@ Here we covered only the most basic definition file structure. For more details 
 
 - **Run something**
 
-  The last section, `%runscript` specifies what we would like to execute when the container is run. Here we just execute our script that prints our a welcome message. You can however include multiple commands in this section. You can even pass options to your commands, just the way you would when writing regular Bash scripts.
+  The last section, `%runscript` specifies what we would like to execute when the container is run. Here we just execute our script that prints out the welcome message. You can however include multiple commands in this section. You can even pass options to your commands, just the way you would when writing regular Bash scripts.
+
+### Let's build the container
+
+We can now use the definition file to and pass it to the build command, which takes all the instructions from it and combines them into a standalone container:
+
+```bash
+$ sudo singularity build singularity-intro.sif files/Singularity-intro.def
+INFO:    Starting build...
+Getting image source signatures
+Copying blob 2f94e549220a skipped: already exists  
+Copying config 56e4dc64c0 done  
+Writing manifest to image destination
+...
+INFO:    Adding runscript
+INFO:    Creating SIF file...
+INFO:    Build complete: singularity-intro.sif
+```
+
+**Make sure you have root privileges on your machine** as this command has to be run with `sudo`. If you now check the directory you are working in, you will see a new file, `singularity-intro.sif`. This is your new Singularity container! Unlike Docker images, you can move it around like a regular file
+
+We can now make sure that our container was built properly and execute the commands specified in the `%runscript` section:
+
+```bash
+$ singularity run singularity-intro.sif
+Hello from inside Docker container!
+```
 
 ## 3. General considerations before building
 
