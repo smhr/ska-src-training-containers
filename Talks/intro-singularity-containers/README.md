@@ -109,7 +109,7 @@ Go to the environment where you have Singularity installed to do some tests. You
 vagrant@ska-training:~$ singularity pull docker://godlovedc/lolcow
 ```
 
-This command will simply download an image that already exists in Docker (docker://godlovedc/lolcow from DockerHub: [lol docker](https://hub.docker.com/r/godlovedc/lolcow) ), and store it as a local file with SIF format.
+This command will simply download an image that already exists in Docker (`docker://godlovedc/lolcow` from DockerHub: [lol docker](https://hub.docker.com/r/godlovedc/lolcow) ), and store it as a local file with SIF format.
 
 
 Confirms you have a file named: `lolcow_latest.sif`: 
@@ -134,36 +134,58 @@ vagrant@ska-training:~$ singularity run lolcow_latest.sif
 
 ## Interact with images
 
-The commands listed here will work with image URIs and to accepting a local path to an image file.
+The commands listed here will work with image URIs and to accepting a local path to an image file. This is an example as we've seen above
 
 ```
 vagrant@ska-training:~$ singularity pull docker://godlovedc/lolcow
 ```
+
+### Using an image for SKA training
+
+We have prepared an image that is available in the Singularity image repository ( [link here](https://cloud.sylabs.io/library/manuparra/ska/skatrainingplot) ). This container image contains the following:
+
+- Creates a python framework that includes the python libraries: `scipy`, `numpy` and `mathplotlib`.
+- It includes a python application that draws a plot in a output file.
+
+The source code to generate is [here](link) (we will go on it later).
+
+### Pulling the new image
+
+This download is around 300 MB.
+
+```
+vagrant@ska-training:~$ singularity pull library://manuparra/ska/skatrainingplot:latest
+```
+
+After that you will see a new file named `skatrainingplot_latest.sif` with the downloaded image.
+
 
 ### Entering the images from a shell
 
 The shell command allows you to open a new shell within your container and interact with it as though it were a small virtual machine. This would be very similar to what you do with docker and run a shell with bash (`docker run .... /bin/bash`):
 
 ```
-vagrant@ska-training:~$  singularity shell lolcow_latest.sif
+vagrant@ska-training:~$  singularity shell skatrainingplot_latest.sif
 ```
 
-Once executed you will be connected to the container (see prompt):
+Once executed you will be connected to the container (yopu will see a new prompt):
 
 ```
-Singularity lolcow_latest.sif:~> 
+Singularity skatrainingplot_latest.sif:~> 
+
 ```
 
 From here you can interact with container, and  you are the *same user* as you are on the host system.
 
 ```
-Singularity lolcow_latest.sif:~> whoami
+Singularity skatrainingplot_latest.sif:~> whoami
 
-manuparra
+vagrant
 
-Singularity lolcow_latest.sif:~> id
+Singularity skatrainingplot_latest.sif:~> id
 
-uid=1000(manuparra) gid=1000(manuparra) groups=1000(manuparra),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lpadmin),126(sambashare)
+uid=900(vagrant) gid=900(vagrant) groups=900(vagrant),27(sudo)
+
 ```
 
 **NOTE**
@@ -172,24 +194,91 @@ If you use singularity with the shell option and and image from `library://`, `d
 
 ### Executing command from a container
 
-The exec command allows you to execute a custom command within a container by specifying the image file. For instance, to execute the cowsay program within the `lolcow_latest.sif` container:
+The exec command allows you to execute a custom command within a container by specifying the image file. For instance, to execute the cowsay program within the `skatrainingplot_latest.sif` container:
+
+To do that, type `exit` from Singularity container and you will return to your host machine. Here, we can execute commands within the container, but not entering on the container. Executing something and then exiting at the same time 
 
 ```
-vagrant@ska-training:~$ singularity exec lolcow_latest.sif cowsay ska
- _____ 
-< ska >
- -----
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+vagrant@ska-training:~$ singularity exec skatrainingplot_latest.sif python3
+Python 3.8.10 (default, Nov 26 2021, 20:14:08) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
 
 ``` 
+This way you are running `python3` from the container with all the libraries that the container has provided. And once we exit the python shell we return to the host. 
+
+Type `CTRL+D` to exit from the python3 shell, and you will return to your host machine.
+
+This is very interesting because we can run something in the container environment that does something, in this case the container provides specific libraries, which are not on the host machine. To try this, we run the following on the host machine:
+
+```
+vagrant@ska-training:~$ python3
+Python 3.6.9 (default, Dec  8 2021, 21:08:43) 
+[GCC 8.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import numpy
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'numpy'
+
+```
+You can see that we haven't installed `numpy`, so we can't use `numpy`.
+
+Now we execute `python3` within the container:
+
+```
+vagrant@ska-training:~$ singularity exec skatrainingplot_latest.sif python3
+Python 3.8.10 (default, Nov 26 2021, 20:14:08) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import numpy
+
+```
+
+Our container has `numpy` and other libraries installed, so you can use them.
+
+In this way we could use the container to execute a script that we have created and run it with all the environment that enables the container, in this case some libraries in some specific versions. 
+This is important because it allows to isolate the host environment with our development, with this we could have different containers with different library versions for example. To test it, we create a `python` file in our host machine:
+
+```
+vi test.py
+```
+
+And we add the following content:
+
+```
+import numpy as np
+a = np.arange(15).reshape(3, 5)
+print(a)
+```
+
+Then we can execute it typing the following:
+
+
+```
+vagrant@ska-training:~$  singularity exec skatrainingplot_latest.sif python3 test.py
+[[ 0  1  2  3  4]
+ [ 5  6  7  8  9]
+ [10 11 12 13 14]]
+
+```
+
+If we try it on our host machine:
+
+```
+vagrant@ska-training:~ $ python3 test.py 
+Traceback (most recent call last):
+  File "test.py", line 1, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'
+```
+
 
 ### Running a container
 
-Singularity containers can execute runscripts. That is, they allow that when calling them from singularity with the exec option, they execute a scripts that define the actions a container should perform when someone runs it
+Singularity containers can execute runscripts. That is, they allow that when calling them from singularity with the exec option, they execute a scripts that define the actions a container should perform when someone runs it.
+
+In this example for `lolcow_latest.sif` you can see a message, that is generated because for this container the developer has created a start point when you call singularity with the option `run`.
 
 ```
 vagrant@ska-training:~$ singularity run lolcow_latest.sif
@@ -206,6 +295,23 @@ vagrant@ska-training:~$ singularity run lolcow_latest.sif
 
 `run` also works with the `library://`, `docker://`, and `shub://` URIs. This creates an ephemeral container that runs and then disappears.
 
+Now we try with our container:
+
+```
+vagrant@ska-training:~/builkd$ singularity run skatrainingplot_latest.sif 
+-----------------------------------------------
+SKA training: Git and Containers
+Plot generated in example.png by default, please provide an output plot file
+```
+
+With this option we can run an application already predefined in the container, but this is not always the default option and depends on how the container was built.
+
+```
+vagrant@ska-training:~/builkd$ singularity run skatrainingplot_latest.sif myplotforska.png
+-----------------------------------------------
+SKA training: Git and Containers
+Plot generated in myplotforska.png file.
+```
 
 ## Interact with files
 
@@ -214,7 +320,7 @@ vagrant@ska-training:~$ singularity run lolcow_latest.sif
 For instance:
 
 ```
-vagrant@ska-training:~$ singularity shell lolcow_latest.sif
+vagrant@ska-training:~$ singularity shell skatrainingplot_latest.sif 
 ```
 
 And then if you type `ls -l`, you will see your own files from the folder you were. *You are in the container* :smile:. 
@@ -222,13 +328,13 @@ And then if you type `ls -l`, you will see your own files from the folder you we
 So here, you can create a file:
 
 ```
-Singularity lolcow_latest.sif:~> echo "This is a SKA training" > hello.txt
+Singularity skatrainingplot_latest.sif :~> echo "This is a SKA training" > hello.txt
 ```
 
 You can see the file created inside the container but it is also in your host folder.
 
 ```
-Singularity lolcow_latest.sif:~> exit
+Singularity skatrainingplot_latest.sif :~> exit
 vagrant@ska-training:~$ ls -l
 ...
 hello.txt
@@ -256,7 +362,7 @@ $ sudo singularity build lolcow.sif docker://godlovedc/lolcow
 
 Singularity definition files,  can be used as the target when building a container. Using the Docker equivalence, these would be the Dockerfile's we use to build an image.
 
-Here you can see an example of a definition file:
+Here you can see an example of a definition file `lolcow.def`:
 
 ```
 Bootstrap: docker
@@ -273,3 +379,86 @@ From: ubuntu:16.04
 %runscript
     fortune | cowsay | lolcat
 ```
+
+We can build it with:
+
+```
+$ sudo singularity build lolcow.sif lolcow.def
+```
+
+Now we can see how the test container we have made for ska is built (`skatraining.def`):
+
+```
+Bootstrap: docker
+From: ubuntu:20.04
+
+%post
+apt-get update && apt-get install -y vim python3 python3-pip
+pip3 install matplotlib
+pip3 install scipy
+pip3 install numpy
+
+cat << EOF > /plot.py
+
+import numpy as np
+import sys
+from scipy.interpolate import splprep, splev
+
+import matplotlib.pyplot as plt
+from matplotlib.path import Path
+from matplotlib.patches import PathPatch
+
+plotname = sys.argv[1] if len(sys.argv)>1 else "example.png"
+
+N = 400
+t = np.linspace(0, 3 * np.pi, N)
+r = 0.5 + np.cos(t)
+x, y = r * np.cos(t), r * np.sin(t)
+fig, ax = plt.subplots()
+ax.plot(x, y)
+plt.xlabel("X value")
+plt.ylabel("Y value")
+plt.savefig(plotname)
+print("-----------------------------------------------")
+print("SKA training: Git and Containers")
+print("Plot generated in " + plotname + " file.")
+print("-----------------------------------------------")
+EOF 
+
+%runscript
+  if [ $# -ne 1 ]; then
+        echo "-----------------------------------------------"   
+        echo "SKA training: Git and Containers"   
+        echo "Plot generated in example.png by default, please provide an output plot file"
+        exit 1
+  fi
+  python3 /plot.py $1
+```
+
+Then we build with:
+
+```
+$ sudo singularity build skatraining.sif skatraining.def
+```
+
+We now explain each of the components of the build file:
+
+- Where the image comes from and what is the component:
+```
+Bootstrap: docker
+From: ubuntu:20.04
+```
+
+- What will be done in the image to build it. In our case include some packages and libraries, and add a python file that makes some plots.
+```
+%post
+```
+
+
+- What we will execute when the container is called with the `run` option.
+```
+%runscript
+```
+
+And this is all for now with containers. In the following training sessions we will go deeper into the use of containers.
+
