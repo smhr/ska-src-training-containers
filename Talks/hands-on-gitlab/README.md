@@ -1,8 +1,8 @@
 # Session: Hands on GitLab 
 
-# SKA regional centre training event: Hands-on Containerization
+## SKA regional centre training event: Hands-on Containerization
 
-The Science User Engagement (SUE) group of the SKA Regional Centre Steering Commitee is glad to announce the SKA Regional Centre Training Event Series: Hands-on Containerization. 
+The Science User Engagement (SUE) group of the SKA Regional Centre Steering Commitee is glad to announce the SKA Regional Centre Training Event Series: Hands-on Containerization. In this session we will work on GitLab, a code hosting platform for version control and collaboration.
 
 <HR>
 
