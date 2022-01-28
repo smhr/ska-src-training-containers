@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 -->
+
 # Introduction to git
 
 In this section you will learn the basics of Git. We will cover all the  necessary terminology and commands, so that you become a proficient Git user. **It is important that you follow this introduction if you have not used Git before!** The following sections will either expand on the concepts first  introduced here or will make use of them on multiple occasions.
@@ -54,7 +56,7 @@ We will not be running any commands in this part just yet. Before we do that, th
   
   Your workflow with Git should generally look something like this:
   ![Git workflow](media/git_stages.png)
-  (Image from the [**Pro Git book by Scott Chacon and Ben Straub**](https://git-scm.com/book/en/v2), released under [**Creative Commons Attribution Non Commercial Share Alike 3.0 license**](https://creativecommons.org/licenses/by-nc-sa/3.0/#) )
+  (Image from the [**Pro Git book by Scott Chacon and Ben Straub**](https://git-scm.com/book/en/v2), released under [**Creative Commons Attribution NonCommercial Share Alike 3.0 license**](https://creativecommons.org/licenses/by-nc-sa/3.0/#) )
 - **branch** - most of the time, code development is not linear: you change some things in one place, add a feature in another and maybe remove something in a completely different file. What if you have multiple collaborators working on separate features? In such a situation, they can all work on their own, personal versions of the code (branches), not modifying everyone else's contributions and possibly the production-ready code.
 - **main/master branch** - this is the branch you want the world to see and use. It should only include files that you are confident other people will be able to use and use them without major issues. It should contain production-ready and working code **only** - if you need to add and test a new feature, create a separate branch for it.
 
@@ -75,12 +77,16 @@ How do you get this repository though? That is what a `clone` command is used fo
 
 ```bash
 $ git clone <repository link>
+Cloning into...
+...
 ```
 
 For example, to clone an official Git repository (using Git of course and hosted on GitHub), you should run
 
 ```bash
-$ git clone https://github.com/git/git.git` (that's a lot of git's)
+$ git clone https://github.com/git/git.git #(that's a lot of git's)
+Cloning into 'git'...
+...
 ```
 
 This command downloads the repository and automatically places it inside a `git` folder (don't confuse it with a `.git` folder, which contains all the information relevant to the version control).
@@ -88,7 +94,9 @@ This command downloads the repository and automatically places it inside a `git`
 By default Git will always create a folder with a name that is the same as the main folder name (in this case `git`). It is possible that you already have a folder named git, maybe with some training materials, but you still want to `clone` the official Git repository. Do you have to move your existing folder somewhere else? Rename it? These sure are viable options, but (arguably) the most convenient method is to force Git to use a different directory name:
 
 ```bash
-$ git clone https://github.com/git/git.git mygit`
+$ git clone https://github.com/git/git.git mygit
+Cloning into 'mygit'...
+...
 ```
 
 With this command we again get all the data from the official Git repository, but this time it is placed inside the `mygit` directory, making any moving or renaming of existing directories unnecessary.
@@ -155,6 +163,9 @@ This change is however not permanently added to the repository history yet! To d
 
 ```bash
 $ git commit -m "Commit message"
+[master 7c0f11afe5] Commit message
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 hello.txt
 ```
 
 The commit message is a short description of the changes that have been made to the repository since the last commit. In our case, we have added a single, very short file, so an equally short commit message *"Added a hello.txt file"* will suffice. However, if you are working on a larger project, possibly with multiple other developers and researchers, you will want to make your commit messages as informative as possible, to make sure everyone can understand the changes made to the files without the need to dig through the source code unnecessarily. Even if you are working on your own, **you will** forget all the details after some time. It is always a good practice to include a short title for a commit and then underneath it to write a short paragraph detailing all the changes made in this commit.
@@ -188,18 +199,20 @@ We told Git to keep track of this file and add to our commits, but now the file 
 So now our `hello.txt` file is ***modified** but not yet staged. We can again run the `git add hello.txt` command to stage it manually, but this can get cumbersome if we want to include all of the modified files in the next commit. Instead, we can use an extra option for our `git commit` command:
 
 ```bash
-$ git commit -a -m "Updated the hello.txt" file"
+$ git commit -a -m "Updated the hello.txt file"
+[master 3bcbd0a81f] Updated the hello.txt file
+ 1 file changed, 1 insertion(+)
 ```
 
 Here the `-a` option adds the `git add` stage implicitly before the commit and you do not have to do it manually. **Important note though**, this option stages **all the modified files** for the commit! So if the scenario described above applies to you, you still need to add only the files that you want explicitly!
 
 ## 5. Tracking Git repository changes
 
-We have now made our first two commits. What if we had more than that? What if you have a project we worked on a while back and don't remember the changes we made months ago? If you remember our "version control" example at the very start, copying files between directories doesn't give us much information. Sure, we could keep separate text files with the changelogs, then develop a place to keep track of them and maybe a script to retrieve these changelogs... Luckily Git comes with these features and much more.
+We have now made our first two commits. What if we had more than that? What if we have a project we worked on a while back and don't remember the changes we made months ago? If you remember our "version control" example at the very start, copying files between directories doesn't give us much information. Sure, we could keep separate text files with the changelogs, then develop a place to keep track of them and maybe a script to retrieve these changelogs (starting to sound familiar?)... Luckily Git comes with these features and much more.
 
 To view the commit history we can use:
 
-```
+```bash
 $ git log
 
 commit a16c465f37b1e8bed33f8994f37a54ecff7fdbaf (HEAD -> master)
@@ -225,11 +238,12 @@ Date:   Fri Jan 14 15:26:53 2022 -0800
 ...
 
 ```
-There is a lot of output. If you keep on holding ENTER, you can scroll through the entire history of Git, although it may take some time. `git log` might seem like a simple command, all it does at the end of the day is display your commit messages. It is however extremely powerful and comes with a lot of options. It is therefore important you familiarise yourself with the most common options or the options you think will be the most useful in your day-to-day work. Here we will only scratch the surface and introduce some of the most common and basic `git log` options, the full documentation, just for viewing commit history is around 50 pages long if pasted in a document.
 
-As you have seen, for projects as big as Git, the length of history can be overwhelming. We are able to limit it though. The easiest option is the limit the output to the final *n* commits:
+There is a lot of output. If you keep on holding ENTER, you can scroll through the entire history of Git, although it may take some time. `git log` might seem like a simple command, all it does at the end of the day is display your commit messages. It is however extremely powerful and comes with a lot of options. It is therefore important you familiarise yourself with the most common options or the options you think will be the most useful in your day-to-day work. Here we will only scratch the surface and introduce some of the most common and basic `git log` options, [**the documentation just for viewing commit history**](https://www.git-scm.com/docs/git-log) is around 50 pages long if pasted in a document.
 
-```
+As you have seen, for projects as big as Git, the length of history can be overwhelming. We are able to limit it though. The easiest option is to limit the output to the final *n* commits:
+
+```bash
 $ git log -1
 
 commit a16c465f37b1e8bed33f8994f37a54ecff7fdbaf (HEAD -> master)
@@ -238,11 +252,12 @@ Date:   Sun Jan 16 18:26:48 2022 +0000
 
     Updated the hello.txt file
 ```
-As we can see, in this case we print out only the last commit. This can be useful if you want to refresh your memory and see the last few commits.
 
-That might not be enough though. For example, what if we wanted to see the commits made in the last 3 weeks, as we remember about an important feature added during that time, but don't remember when exactly? `git log` has an option for that:
+We print out only the last commit. This can be useful if you want to refresh your memory and see the last few commits.
 
-```
+That might not be enough though. For example, what if we wanted to see the commits made in the last 3 weeks, as we remember an important feature was added during that time, but don't remember when exactly? `git log` has an option for that:
+
+```bash
 $ git log --since="3 weeks ago"
 
 commit a16c465f37b1e8bed33f8994f37a54ecff7fdbaf (HEAD -> master)
@@ -272,11 +287,12 @@ Date:   Tue Dec 28 00:20:46 2021 +0000
 
 
 ```
-Even over the course of only 3 weeks there have been quite a few commits to the Git repository, so here we inlcude only the latest one and one that had happened 3 weeks earlier.
 
-If you work in a collaboration where multiple people commit to the project repository, you might want to search for changes made by one person (maybe they have written an amazin algorithm and you want to credit their work in your next comference talk).
+Even over the course of only 3 weeks there have been quite a few commits to the Git repository, so here we include only the latest one and one that had happened 3 weeks earlier.
 
-```
+If you work in a collaboration where multiple people commit to the project repository, you might want to search for changes made by one person (maybe they have written an amazing algorithm and you want to credit their work in your next conference talk):
+
+```bash
 $ git log --author="Steve"
 
 commit 84544f2ea3441a5715fc3e2dfbb025083872fac5
@@ -306,9 +322,10 @@ Date:   Tue Jul 16 11:47:37 2019 -0700
 
 ...
 ```
+
 Here we are looking at any commits authored by Steves. We can also combine the options and for example look at commits based on the author and the time of the commit:
 
-```
+```bash
 $ git log --author="Steve" --since="2 years ago"
 
 commit 84544f2ea3441a5715fc3e2dfbb025083872fac5
@@ -324,9 +341,9 @@ Date:   Wed Jul 29 03:33:28 2020 +0000
     Signed-off-by: Junio C Hamano <gitster@pobox.com>
 ```
 
-All of these are not are not very helpful if you are looking for changes to a specific functions. You might see some relevant information in the commit messages, but that is often not enough, especially if the messages do not have enough detail. With Git, we can easily obtain the commits that changed the speficit functions. It is only fair if we track changes to function used to display the log messages:
+All of these are not are not very helpful if you are looking for changes to a specific function. You might see some relevant information in the commit messages, but that is often not enough, especially if the messages are not detailed. With Git, we can easily obtain the commits that changed the specific functions. It is only fair if we track changes to function used to display the log messages:
 
-```
+```bash
 $ git log -L:show_log:log-tree.c
 
 commit f1ce6c191e9d15ce78041d8b6496c246b10d9b2d
@@ -355,5 +372,5 @@ diff --git a/log-tree.c b/log-tree.c
         struct pretty_print_context ctx = {0};
 
 ```
+
 As a result, we get back the commits that changed the function `show_log` from the `log-tree.c` file in any way.
-## Further reading
