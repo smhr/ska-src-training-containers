@@ -1,4 +1,4 @@
-# Hands on GitLab 
+# Session: Hands on GitLab 
 
 # SKA regional centre training event: Hands-on Containerization
 
