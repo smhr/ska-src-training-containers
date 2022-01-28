@@ -1,1 +1,1 @@
-echo "Hello from inside Docker container!"
+echo "Hello from inside the Docker container!"
