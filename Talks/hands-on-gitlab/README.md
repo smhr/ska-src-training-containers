@@ -27,7 +27,7 @@ We will use GitLab, but there are other platforms that offer very similar servic
 
 ## What is GitLab and how does it work
 
-GitLab is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere. Developing your project or analysis collaboratively on GitLab or GitHub provides a prompter to document your work in detail and it provides a great opportunity to get additional contributors to your idea. Contributions can be everything from new ideas, to bug reports and actual code contributions.
+GitLab is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere. Developing your project or analysis collaboratively on GitLab  provides a prompter to document your work in detail and it provides a great opportunity to get additional contributors to your idea. Contributions can be everything from new ideas, to bug reports and actual code contributions.
 
 The platform uses version control via git command, so you will have a complete history of all the changes for all the files, and when and who commited those changes. So no more files ending with `_v2_final_reviewed_Feb_finalfinal.pdf`. Additionally, you have an issue tracker to focus discussions on specific topics easy, a build-in wiki, and even space to host web pages.
 
