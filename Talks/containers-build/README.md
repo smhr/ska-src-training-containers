@@ -102,7 +102,7 @@ We can then test the image by running it and checking the output:
 
 ```bash
 $ docker container run --name test-docker docker-intro:v0.1
-Hello from inside Docker container!
+Hello from inside the Docker container!
 ```
 
 ## 2. Building Singularity containers
@@ -120,7 +120,7 @@ From: ubuntu:18.04
   git -C /software/ clone https://gitlab.com/ska-telescope/src/ska-src-training-containers.git
 
 %runscript
-  /software/ska-src-training-containers/Talks/containers-build/files/hello_container.sh
+  /software/ska-src-training-containers/Talks/containers-build/files/hello_singularity.sh
   ```
 
 - **Header**
@@ -178,7 +178,7 @@ We can now make sure that our container was built properly and execute the comma
 
 ```bash
 $ singularity run singularity-intro.sif
-Hello from inside Docker container!
+Hello from inside the Singularity container!
 ```
 
 ## 3. General considerations before building
