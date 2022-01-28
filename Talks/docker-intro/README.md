@@ -15,7 +15,7 @@ More generally, you should use it as a tool for distributing consistent software
 
 For our first example, we will run a short Docker command to download the *Hello World* of **Docker images** and start our very first **Docker container**.
 
-```docker
+```bash
 
 $ docker container run hello-world
 
@@ -52,8 +52,9 @@ For more examples and ideas, visit:
 
 - **The command that we execute**
   
-    ```docker
+    ```bash
     $ docker container run hello-world
+    ...
     ```
 
     instructs Docker that we would like to start a container using a `hello-world` image. This command can also be written as `docker run hello-world`, omitting the `container` part. This change was [**introduced in 2017**](https://www.docker.com/blog/whats-new-in-docker-1-13/) with a major overhaul of the Docker CLI (Command Line Interface). If the version of Docker installed on your machine comes from before these changes were introduced (we strongly recommend that you upgrade it due to security reasons), the full command will not work and you will have to use the short version. This section however is written with the new versions of Docker in mind and will **follow the convention of using the extended versions of the commands**.
@@ -72,9 +73,10 @@ For more examples and ideas, visit:
 
     You could also separate the `docker container run ...` command above into two instructions:
 
-    ```docker
+    ```bash
     $ docker image pull hello-world
     $ docker container run hello-world
+    ...
     ```
 
     In this case we are very explicit and tell Docker to first download (pull) the image from the external repository and then start the container based on that image. If you already have the image on your host machine, you can skip the `pull` command. In this case, including the `docker image pull` separately can be seen as a bit redundant as Docker takes care of any missing images with `docker container run`. You can however just pull the image and not run it at all, or pull it when you have access to the Internet and later start the container when you are offline.
@@ -95,8 +97,9 @@ For more examples and ideas, visit:
 
     The placement and structure of relevant directories can be different depending on your Docker installation and require root permissions to access. There is however a short command that lists all the locally available images:
 
-    ```docker
+    ```bash
     $ docker image ls
+    ...
     ```
 
     Depending on how long (if at all) you have been using Docker for, the output will show only a single image that we have used above or multiple (as many as few tens of) images, as seen below (this is what I see when I run the above command on my work PC - **you will see something different**)
@@ -126,13 +129,14 @@ For more examples and ideas, visit:
 
     If you know its name, you can list just a specific image:
 
-    ```docker
+    ```bash
     $ docker image ls hello-world
+    ...
     ```
 
     or even use wildcards if you are not sure about the full image name (was it `nvidia/cuda` or `nvidia/CUDA`?):
 
-    ```docker
+    ```bash
     $ docker image ls nvidia/*
     REPOSITORY    TAG         IMAGE ID       CREATED        SIZE
     nvidia/cuda   10.1-base   bfa75f8b799e   6 months ago   105MB
@@ -147,7 +151,7 @@ For more examples and ideas, visit:
 
     We made sure that the container was no longer running and then we removed it. What if we want to go one step further and want to get rid of the underlying image? Docker has a fairly intuitive command for that as well - instead of removing a container, we tell it to remove the image instead:
 
-    ```docker
+    ```bash
     $ docker image rm  hello-world
     Untagged: hello-world:latest
     Untagged: hello-world@sha256:9f6ad537c5132bcce57f7a0a20e317228d382c3cd61edae14650eec68b2b345c
@@ -163,7 +167,7 @@ For more examples and ideas, visit:
 
     In the same way we listed the images currently available locally on our machine, we can examine currently running containers:
 
-    ```docker
+    ```bash
     $ docker container ls
     CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
     ```
@@ -174,7 +178,7 @@ For more examples and ideas, visit:
 
     We still have an option to check whether our container was started at all. We can force Docker to list *all* the containers with the extra `-a` option:
 
-    ```docker
+    ```bash
     $ docker container ls -a
     CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                    PORTS     NAMES
     7dd021096f75   hello-world             "/hello"                 3 hours ago    Exited (0) 3 hours ago              trusting_herschel
@@ -188,7 +192,7 @@ For more examples and ideas, visit:
 
     If you are running containers right now, you will see them as "Up", as below
 
-    ```docker
+    ```bash
     $ docker container ls -a
     CONTAINER ID   IMAGE            COMMAND                  CREATED        STATUS         PORTS     NAMES
     f1d9fa05caae   rabbitmq:3.8.2   "docker-entrypoint.s…"   2 months ago   Up 5 minutes             rabid_rabbit
@@ -198,7 +202,7 @@ For more examples and ideas, visit:
 
     Exited containers can be thought of as being hibernated - they are not running, their internal state is saved and they can be woken up and run again. When we are satisfied with the results provided by our container launch,  we might need to remove it. We can do this with the help of `container rm` command:
 
-    ```docker
+    ```bash
     $ docker container rm trusting_herschel
     trusting_herschel
     ```
@@ -213,7 +217,7 @@ We are going to experiment with a much more useful image: an official Python 3.1
 
 Instead of just running the image, we fill first pull it:
 
-```docker
+```bash
 $ docker image pull python:3.10.2-slim-bullseye
 3.10.2-slim-bullseye: Pulling from library/python
 a2abf6c4d29d: Pull complete 
@@ -228,7 +232,7 @@ docker.io/library/python:3.10.2-slim-bullseye
 
 If we just run it, we won't get any output like when using the `hello-world` image (we will also explicitly test whether the container is running):
 
-```docker
+```bash
 $ docker container run --name python-test python:3.10.2-slim-bullseye
 
 $ docker container ls -a
@@ -238,25 +242,25 @@ CONTAINER ID   IMAGE                         COMMAND                  CREATED   
 
 The container exits immediately, just like the `hello-world` one. That's because by default, there is no work to be done. We can change that. We can remove the container like we have done before, but this time, we can use the name we have provided explicitly with `--name` flag (I used `python-test`, feel free to name your container something else, just make sure you change the name in the commands that use it).
 
-```docker
+```bash
 $ docker container rm python-test
 python-test
 ```
 
 I removed this container because I want to reuse the name and also keep my Docker containers to bare minimum. We can use the same image to actually start executing some code from INSIDE the running container. We will start slowly, I want to find out a version of Python available inside the running container:
 
-``` docker
+```bash
 $ docker container run --name python-test python:3.10.2-slim-bullseye python3 --version
 Python 3.10.2
 ```
 
 That's the version we expected to see based on the image we're using. Most importantly, this is the version that is shipped inside this Python image and executed inside our container. You do not have to have Python installed on your host machine, or can have a completely different version (for example I am running 3.8.5 on my host) - Python inside your container is not even aware of that other version.
 
-But let's do some actual work. We will do it in two ways. First we will launch a very simple script that you can download from **here**. You do not have to be familiar with Python to understand what it does: we simply print out a welcome message and perform some very basic operations.
+But let's do some actual work. We will do it in two ways. First we will launch a very simple script that you can download from [**here**](files/script.py). You do not have to be familiar with Python to understand what it does: we simply print out a welcome message and perform some very basic operations.
 
 As we have mentioned before, containers by default do not know much about their host machine. Most importantly, they do not share any files with it, so they will not be able to find our Python script and run it. We therefore have to make it available inside the container.  We launch our image it with the additional options that *mount* the data inside the container:
 
-```docker
+```bash
 $ docker container run --name python-test-2 --mount type=bind,source=$(pwd),target=/scripts python:3.10.2-slim-bullseye python3 /scripts/script.py
 Welcome to Docker Python
 8
@@ -276,7 +280,7 @@ Making data available inside your container at a runtime has some obvious drawba
 
 Second approach can be running our image *interactively*. In this case our container will behave like a usual Python CLI interpreter and we can treat it as such.
 
-```docker
+```bash
 $ docker container run --name python-test-3 -it python:3.10.2-slim-bullseye
 Python 3.10.2 (main, Jan 18 2022, 20:00:03) [GCC 10.2.1 20210110] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -286,7 +290,7 @@ I'm inside the container
 
 However, we are not limited to running just Python. This particular image comes with bash installed, so we can make use of it. We can launch an interactive bash session and treat this container like a regular terminal (albeit with many things missing):
 
-```docker
+```bash
 $ docker container run --name python-test-4 -it python:3.10.2-slim-bullseye /bin/bash
 root@2decf291ee44:/# pwd
 /
@@ -300,13 +304,13 @@ drwxr-xr-x   2 root root 4096 Dec 11 17:25 home
 ...
 ```
 
-This way you can just containers not just for one-off jobs, but also use it for interactive work.
+This way you can use containers not just for one-off jobs, but also use them for interactive work.
 
 **IMPORTANT:**  Launching our container the way we did just now may seem innocent enough, but comes with a **serious security problem** If you look closely at the command line prompt, we are listed as a user `root`, meaning we have administrative privileges inside the container. This becomes a very serious issue if we give our container access to any external resources such as host disks or network. We usually do not perform our day-to-day activities with privileged accounts and we shouldn't do that inside our containers either.
 
 We can change this default behaviour by providing a `--user` flag to our `run` command:
 
-```docker
+```bash
 $ docker container run --user 1000:1000 --name python-test-5 -it python:3.10.2-slim-bullseye /bin/bash
 I have no name!@46023ae04069:/$
 ```
