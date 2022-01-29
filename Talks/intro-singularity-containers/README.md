@@ -1,22 +1,25 @@
 # Introduction to Singularity containers
 
-<HR>
+
 [[_TOC_]]
+
 <HR>
+
 ## Objectives and scope
 In this tutorial we will work with a containerization system called Singularity, which has many features that make it interesting for workflow development and long-term reproducibility.
 
 We will cover the following:
 
-- Singularity and Docker
-- Preparing the work environment
-- Use of Singularity
-- Create our first container
-- Share your work!
+- Why Singularity
+- Preparing the working environment
+- Basic use of Singularity
+- Your own Container Hub
+- Creating our first container
+- Share your work
 
 ## What is Singularity and what advantages does it have over Docker.
 
-Singularity is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible. You can build a container using Singularity on your laptop, and then run it on many of the largest HPC clusters in the world, local university or company clusters, a single server, in the cloud, or on a workstation down the hall. Your container is a single file, and you don’t have to worry about how to install all the software you need on each different operating system.
+Singularity is a container platform (like Docker, PodMan, Moby, LXD, ... among other). It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible. You can build a container using Singularity on your laptop, and then run it on many of the largest HPC clusters in the world, local university or company clusters, a single server, in the cloud, or on a workstation down the hall. Your container is a single file, and you don’t have to worry about how to install all the software you need on each different operating system.
 
 
 **Advantages:**
