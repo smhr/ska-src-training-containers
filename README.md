@@ -52,6 +52,7 @@ In this [link](https://ska-telescope.gitlab.io/src/ska-src-training-containers/)
 
 ## Talks
 
+Monday 31/1/22: 
 - Data handling for SKA - Marcella Massarti (INAF)
 - The SKA science data challenges - Philippa Hartley (SKAO)
 - [Introduction to Git](./Talks/git-intro/README.md) - Mateusz Malenta (University of Manchester)
@@ -61,6 +62,8 @@ In this [link](https://ska-telescope.gitlab.io/src/ska-src-training-containers/)
 - [Introduction to Singularity](./Talks/intro-singularity-containers/README.md) [Presentation PDF](./Talks/intro-singularity-containers/Introduction_to_Singularity_Containers.pdf) - Manuel Parra (IAA-CSIC)
 - [Hands-on: GitLab](./Talks/hands-on-gitlab/README.md) - Manuel Parra (IAA-CSIC)
 - Hands-on Containers (beginners) - A. Clarke (SKAO)
+
+Monday 7/2/22:
 - Highlights of the training so far - A. Bonaldi (SKAO)
 - Intermediate Gitlab - Javier Moldón (IAA-CSIC)
 - [Building your own custom container](./Talks/containers-build/README.md) - Mateusz Malenta (University of Manchester)
