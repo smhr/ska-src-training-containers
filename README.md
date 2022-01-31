@@ -56,7 +56,7 @@ Monday 31/1/22:
 - [Data handling for SKA](./Talks/data-handling/Towards_the_SKA__The_origin_of_big_data.pdf) - Marcella Massarti (INAF)
 - [The SKA science data challenges](./Talks/SKA-data-challenges/Science_Data_Challenges.pdf) - Philippa Hartley (SKAO)
 - [Introduction to Git](./Talks/git-intro/README.md) - Mateusz Malenta (University of Manchester)
-- Introduction to Github/Gitlab - Javier Moldón (IAA-CSIC)
+- [Introduction to Github/Gitlab](.Talks/intro_github_gitlab/intro_github_ska_training.pdf) - Javier Moldón (IAA-CSIC)
 - [Introduction to Containers](./Talks/containers-intro/README.md) Mateusz Malenta (University of Manchester)
 - [Introduction to Docker](./Talks/docker-intro/README.md) - Mateusz Malenta (University of Manchester)
 - [Introduction to Singularity](./Talks/intro-singularity-containers/README.md) [Presentation PDF](./Talks/intro-singularity-containers/Introduction_to_Singularity_Containers.pdf) - Manuel Parra (IAA-CSIC)
