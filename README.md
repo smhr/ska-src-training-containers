@@ -65,7 +65,7 @@ Monday 31/1/22:
 
 Monday 7/2/22:
 - Highlights of the training so far - A. Bonaldi (SKAO)
-- Intermediate Gitlab - Javier Moldón (IAA-CSIC)
+- [Intermediate Gitlab](./Talks/intermediate_github_gitlab/intermediate_github_gitlab.pdf) - Javier Moldón (IAA-CSIC)
 - [Building your own custom container](./Talks/containers-build/README.md) - Mateusz Malenta (University of Manchester)
 - Hands-on Containers (advanced) - Alex Clarke (SKAO)
 
